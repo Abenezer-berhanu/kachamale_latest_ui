@@ -6,42 +6,38 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Navbar() {
   return (
-    <div className="h-[72px] bg-main_blue grid grid-cols-2 items-center px-16">
-      <div className="flex gap-4">
-        <Link href={"/"} className="flex items-center justify-center">
+    <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
+      {/* Left Side: Logo and Search */}
+      <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center justify-center">
           <Image
-            src={"/assets/logo.png"}
+            src="/assets/logo.png"
             unoptimized
             alt="logo"
             width={200}
             height={200}
-            className="max-w-[154px] h-[44px] object-contain"
+            className="max-w-[120px] sm:max-w-[154px] h-[44px] object-contain"
           />
         </Link>
-        <div className="flex-1 h-10 relative">
+
+        {/* Show Search Input on large screens, icon on tablet/smaller */}
+        <div className="hidden md:flex flex-1">
           <NavbarSearch />
-          <Image
-            src={"/assets/searchLogo.png"}
-            alt="search logo"
-            width={100}
-            height={100}
-            className="absolute top-0 bottom-0 my-auto left-3 h-[20px] w-[20px]"
-          />
-          <Link
-            href={"/search"}
-            className="absolute h-[20px] w-[20px] right-5 top-0 bottom-0 my-auto "
-          >
+        </div>
+        <div className="md:hidden flex items-center">
+          <button aria-label="Search">
             <Image
-              src={"/assets/filterLogo.png"}
-              alt="filter logo"
-              width={100}
-              height={100}
-              className="h-[20px] w-[20px]"
+              src="/assets/searchLogoWhite.png"
+              alt="search icon"
+              width={24}
+              height={24}
             />
-          </Link>
+          </button>
         </div>
       </div>
-      <div className="flex justify-end">
+
+      {/* Right Side: Avatar */}
+      <div className="flex items-center">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
