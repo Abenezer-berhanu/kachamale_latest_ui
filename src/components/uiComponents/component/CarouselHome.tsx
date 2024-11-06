@@ -41,7 +41,7 @@ function CarouselHome() {
           loop: true,
         }}
         onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.start}
+        // onMouseLeave={plugin.current.start}
         setApi={setApi}
       >
         <CarouselContent>
