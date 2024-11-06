@@ -46,10 +46,8 @@ function CarouselHome() {
       >
         <CarouselContent>
           {carouselCar.map((item, idx) => (
-            <CarouselItem className="flex gap-4" key={idx}>
-              {item.map((result, index) => (
-                <SingleCarouselCard key={index} data={result} />
-              ))}
+            <CarouselItem className="flex gap-4 tablet:basis-1/2" key={idx}>
+              <SingleCarouselCard key={idx} data={item} />
             </CarouselItem>
           ))}
         </CarouselContent>
