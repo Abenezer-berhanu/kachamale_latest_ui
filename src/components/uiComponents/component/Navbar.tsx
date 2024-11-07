@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-1 max-w-[800px]">
         <Link href="/" className="flex items-center justify-center">
           <Image
             src="/assets/logo.png"
@@ -21,7 +21,7 @@ export default function Navbar() {
         </Link>
 
         {/* Show Search Input on large screens, icon on tablet/smaller */}
-        <div className="hidden md:flex flex-1">
+        <div className="hidden md:flex flex-1 px-3">
           <NavbarSearch />
         </div>
         <div className="md:hidden flex items-center">

@@ -20,7 +20,7 @@ export const SingleCarouselCard = ({ data }: { data: propsInterface }) => {
         alt={data.title}
         width={500}
         height={500}
-        className="w-full max-w-[330px] absolute bottom-2 right-1 z-0"
+        className="w-full max-w-[350px] absolute bottom-2 right-1 z-0"
       />
     </div>
   );
