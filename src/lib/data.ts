@@ -46,12 +46,7 @@ export const mockCar = [
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
-      
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",      
     ],
     make: "Hyundai",
     model: "Avante",
@@ -80,7 +75,7 @@ export const mockCar = [
       "A reliable and well-maintained foreign used Hyundai Avante. Excellent fuel efficiency and a smooth driving experience. The car is in pristine condition with no accidents or damages. It’s perfect for both city commuting and long drives.",
     price: 18500,
     negotiationAvailable: true,
-    phoneNumber: "+251 911 234 567",
+    phoneNumber: "+251919298886",
     payment: "Silver",
   },
   {

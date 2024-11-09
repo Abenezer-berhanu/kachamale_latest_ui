@@ -11,7 +11,7 @@ export default function CustomeButton({
 }) {
   return (
     <button
-      className={`bg-main_blue rounded-xl text-white font-semibold w-full py-2 ${className}`}
+      className={`bg-main_blue rounded-xl text-white font-semibold w-full py-3 ${className}`}
       onClick={onClick}
     >
       {title}

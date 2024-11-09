@@ -121,7 +121,7 @@ export default async function page({
           </div>
         </section>
         <section className="h-full w-full flex flex-col gap-3">
-          <DetailPageContactInfo />
+          <DetailPageContactInfo phone={data.phoneNumber}/>
           {/* ad will be put here */}
           <div className="max-tablet:hidden">
             <Image
