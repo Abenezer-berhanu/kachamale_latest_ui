@@ -1,4 +1,6 @@
 interface CarType {
+  id: number | string;
+  slug: string;
   category: string;
   sellerCity: string;
   sellerStreet: string;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface PropsType {
   name: string;
@@ -9,11 +10,12 @@ interface PropsType {
   price: number | string;
   condition: string;
   transmission: string;
+  slug: string;
 }
 
 export default function HomePageCard(props: PropsType) {
   return (
-    <div className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1 max-w-[540px] ">
+    <Link href={props.slug} className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1 max-w-[540px]">
       <div className="">
         <Image
           src={props.img}
@@ -42,6 +44,6 @@ export default function HomePageCard(props: PropsType) {
           <Badge variant="outline">{props.transmission}</Badge>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -37,7 +37,9 @@ export const carouselCar = [
 
 export const mockCar = [
   {
+    id: 1,
     category: "Car",
+    slug: "hyundai-avante-blue-2021-1",
     sellerCity: "Addis Ababa",
     sellerStreet: "Bole Medhanialem",
     images: [
@@ -45,6 +47,11 @@ export const mockCar = [
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      
     ],
     make: "Hyundai",
     model: "Avante",
@@ -64,6 +71,7 @@ export const mockCar = [
     isCarRegistered: true,
     body: "Sedan",
     fuel: "Petrol",
+    mileage: 38000,
     seats: 5,
     numberOfCylinders: 4,
     engineSize: "1.6L",
@@ -76,7 +84,9 @@ export const mockCar = [
     payment: "Silver",
   },
   {
+    id: 2,
     category: "Car",
+    slug: "toyota-corolla-white-2018-2",
     sellerCity: "Addis Ababa",
     sellerStreet: "Lideta, Near Lion Hotel",
     images: [
@@ -92,6 +102,7 @@ export const mockCar = [
     interiorColor: "Gray",
     condition: "Local Used",
     transmission: "Manual",
+    mileage: 38000,
     keyFeatures: [
       "Bluetooth Connectivity",
       "Air Conditioning",
@@ -114,7 +125,9 @@ export const mockCar = [
     payment: "Gold",
   },
   {
+    id: 3,
     category: "Car",
+    slug: "Mercedes-Benz-C-Class-silver-2020-3",
     sellerCity: "Addis Ababa",
     sellerStreet: "Kazanchis, Near the African Union",
     images: [
@@ -126,6 +139,7 @@ export const mockCar = [
     make: "Mercedes-Benz",
     model: "C-Class",
     yearOfManufacture: 2020,
+    mileage: 38000,
     color: "Silver",
     interiorColor: "Beige",
     condition: "Foreign Used",
@@ -152,7 +166,9 @@ export const mockCar = [
     payment: "Platinum",
   },
   {
+    id: 4,
     category: "Car",
+    slug: "nissan-x-trial-black-2019-4",
     sellerCity: "Addis Ababa",
     sellerStreet: "Megenagna, Near the Police Station",
     images: [
@@ -164,6 +180,7 @@ export const mockCar = [
     make: "Nissan",
     model: "X-Trail",
     yearOfManufacture: 2019,
+    mileage: 38000,
     color: "Black",
     interiorColor: "Dark Gray",
     condition: "Foreign Used",
@@ -190,6 +207,8 @@ export const mockCar = [
     payment: "Silver",
   },
   {
+    id: 5,
+    slug: "kia-sportage-red-2022-5",
     category: "Car",
     sellerCity: "Addis Ababa",
     sellerStreet: "Bole, Next to the Airport",
@@ -202,6 +221,7 @@ export const mockCar = [
     make: "Kia",
     model: "Sportage",
     yearOfManufacture: 2022,
+    mileage: 38000,
     color: "Red",
     interiorColor: "Tan",
     condition: "Brand New",
@@ -228,3 +248,13 @@ export const mockCar = [
     payment: "Gold",
   },
 ];
+
+export const users = [
+  {
+    id: 1,
+    profile: "https://cdn-icons-png.freepik.com/256/1077/1077114.png?semt=ais_hybrid",
+    fullName: "John Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+251919298886",
+  }
+]

@@ -16,6 +16,7 @@ export default function HomeCarsListWrapper() {
               " " +
               item?.yearOfManufacture
           )}
+          slug={item.slug}
           horsePower={item.horsePower}
           condition={item.condition}
           img={item.images[0]}
