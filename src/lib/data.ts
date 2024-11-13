@@ -116,7 +116,7 @@ export const mockCar = [
       "A well-maintained Toyota Corolla, locally used, with excellent mileage and performance. Ideal for family use and daily commuting in Addis Ababa.",
     price: 12500,
     negotiationAvailable: false,
-    phoneNumber: "+251 911 345 678",
+    phoneNumber: "+251919298886",
     payment: "Gold",
   },
   {
@@ -157,7 +157,7 @@ export const mockCar = [
       "A luxurious Mercedes-Benz C-Class, foreign used, offering both comfort and performance. It’s a great choice for anyone looking for a high-end ride in excellent condition.",
     price: 35000,
     negotiationAvailable: true,
-    phoneNumber: "+251 920 876 543",
+    phoneNumber: "+251919298886",
     payment: "Platinum",
   },
   {
@@ -198,7 +198,7 @@ export const mockCar = [
       "A spacious and reliable Nissan X-Trail, perfect for Ethiopian roads. It offers great performance both in the city and off-road. Well maintained and in excellent condition.",
     price: 25000,
     negotiationAvailable: true,
-    phoneNumber: "+251 922 234 567",
+    phoneNumber: "+251919298886",
     payment: "Silver",
   },
   {
@@ -239,7 +239,7 @@ export const mockCar = [
       "A brand-new Kia Sportage, ideal for family outings and adventurous road trips in Ethiopia. It combines modern design with advanced features for a comfortable ride.",
     price: 30000,
     negotiationAvailable: false,
-    phoneNumber: "+251 934 567 890",
+    phoneNumber: "+251919298886",
     payment: "Gold",
   },
 ];
