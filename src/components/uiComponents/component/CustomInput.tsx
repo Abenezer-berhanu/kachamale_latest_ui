@@ -6,6 +6,7 @@ interface PropsInterface {
   className?: string;
   onChange?: () => void;
   type?: string;
+  props?: any;
 }
 
 export default function CustomInput({
@@ -14,6 +15,7 @@ export default function CustomInput({
   className,
   onChange,
   type = "text",
+  ...props
 }: PropsInterface) {
   return (
     <div className="flex flex-col gap-2 my-2">
@@ -23,6 +25,8 @@ export default function CustomInput({
         onChange={onChange}
         className={`rounded-lg indent-3 py-2 border ${className}`}
         type={type}
+        required
+        {...props}
       />
     </div>
   );
