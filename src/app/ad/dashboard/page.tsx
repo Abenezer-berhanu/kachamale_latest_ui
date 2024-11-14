@@ -7,8 +7,8 @@ export default function page() {
   const id = 1;
   const cars = mockCar.filter((car) => car.sellerId === id);
   return (
-    <div className="min-h-screen grid grid-cols-2 gap-10">
-      <div className="w-full">
+    <div className="min-h-screen grid grid-cols-3 gap-10">
+      <div className="w-full col-span-2">
         <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
         <DashboardCarTable cars={cars} />
       </div>
