@@ -1,31 +1,21 @@
-import HomePageCard from "@/components/uiComponents/component/HomePageCard";
-import { mockCar } from "@/lib/data";
+import DashboardCarTable from "@/components/uiComponents/component/DashboardCarTable";
+import Notification from "@/components/uiComponents/component/Notification";
+import { mockCar, notifications } from "@/lib/data";
 import React from "react";
 
 export default function page() {
+  const id = 1;
+  const cars = mockCar.filter((car) => car.sellerId === id);
   return (
-    <div className="min-h-screen">
-      <div className="grid mdMob:grid-cols-2 tablet:grid-cols-3 mdTab:grid-cols-4 gap-4 my-3">
-        {mockCar.map((item, idx) => (
-          <HomePageCard
-            name={String(
-              item?.make +
-                " " +
-                item?.model +
-                " " +
-                item?.color +
-                " " +
-                item?.yearOfManufacture
-            )}
-            slug={item.slug}
-            horsePower={item.horsePower}
-            condition={item.condition}
-            img={item.images[0]}
-            location={String(item.sellerCity + " " + item.sellerStreet)}
-            price={item.price}
-            transmission={item.transmission}
-            key={idx}
-          />
+    <div className="min-h-screen grid grid-cols-2 gap-10">
+      <div className="w-full">
+        <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
+        <DashboardCarTable cars={cars} />
+      </div>
+      <div className="w-full space-y-3">
+        <p className="text-2xl font-bold text-gray_text">Notification</p>
+        {notifications.map((item, idx) => (
+          <Notification data={item} key={idx} />
         ))}
       </div>
     </div>

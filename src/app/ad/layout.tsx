@@ -7,7 +7,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
       <div>
         <DashboardSidebar />
       </div>
-      <div>{children}</div>
+      <div className="flex-1 p-2">{children}</div>
     </div>
   );
 }

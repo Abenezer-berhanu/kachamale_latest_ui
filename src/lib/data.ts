@@ -46,7 +46,7 @@ export const mockCar = [
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
       "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",      
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
     ],
     make: "Hyundai",
     model: "Avante",
@@ -75,6 +75,7 @@ export const mockCar = [
       "A reliable and well-maintained foreign used Hyundai Avante. Excellent fuel efficiency and a smooth driving experience. The car is in pristine condition with no accidents or damages. It’s perfect for both city commuting and long drives.",
     price: 18500,
     negotiationAvailable: true,
+    sellerId: 1,
     phoneNumber: "+251919298886",
     payment: "Silver",
   },
@@ -116,6 +117,7 @@ export const mockCar = [
       "A well-maintained Toyota Corolla, locally used, with excellent mileage and performance. Ideal for family use and daily commuting in Addis Ababa.",
     price: 12500,
     negotiationAvailable: false,
+    sellerId: 1,
     phoneNumber: "+251919298886",
     payment: "Gold",
   },
@@ -157,6 +159,7 @@ export const mockCar = [
       "A luxurious Mercedes-Benz C-Class, foreign used, offering both comfort and performance. It’s a great choice for anyone looking for a high-end ride in excellent condition.",
     price: 35000,
     negotiationAvailable: true,
+    sellerId: 1,
     phoneNumber: "+251919298886",
     payment: "Platinum",
   },
@@ -198,6 +201,7 @@ export const mockCar = [
       "A spacious and reliable Nissan X-Trail, perfect for Ethiopian roads. It offers great performance both in the city and off-road. Well maintained and in excellent condition.",
     price: 25000,
     negotiationAvailable: true,
+    sellerId: 3,
     phoneNumber: "+251919298886",
     payment: "Silver",
   },
@@ -239,6 +243,7 @@ export const mockCar = [
       "A brand-new Kia Sportage, ideal for family outings and adventurous road trips in Ethiopia. It combines modern design with advanced features for a comfortable ride.",
     price: 30000,
     negotiationAvailable: false,
+    sellerId: 1,
     phoneNumber: "+251919298886",
     payment: "Gold",
   },
@@ -247,9 +252,33 @@ export const mockCar = [
 export const users = [
   {
     id: 1,
-    profile: "https://cdn-icons-png.freepik.com/256/1077/1077114.png?semt=ais_hybrid",
+    profile:
+      "https://cdn-icons-png.freepik.com/256/1077/1077114.png?semt=ais_hybrid",
     fullName: "John Doe",
     email: "john@gmail.com",
     phoneNumber: "+251919298886",
-  }
-]
+  },
+];
+
+export const notifications = [
+  {
+    name: "John doe",
+    description: "Payment received",
+    time: "15m ago",
+  },
+  {
+    name: "Mark Smith",
+    description: "Good to know you",
+    time: "10m ago",
+  },
+  {
+    name: "jeny jorge",
+    description: "May i get the image",
+    time: "5m ago",
+  },
+  {
+    name: "Lawra swiden",
+    description: "when is your flight",
+    time: "2m ago",
+  },
+];
