@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Sheet,
   SheetContent,
@@ -10,7 +10,6 @@ import {
 import DashboardSidebarCard from "./DashboardSidebarCard";
 import { Camera, Clock5, House, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
-
 
 const HumbergerMenu = () => {
   return (
@@ -53,12 +52,35 @@ function DashboardSidebar() {
         </Sheet>
       </div>
       <div className="w-[240px] py-3 shadow-md h-[700px] rounded-lg px-5 flex flex-col">
-        <DashboardSidebarCard label="Dashboard" link="/ad/dashboard" Icon={House}/>
-        <DashboardSidebarCard label="My Ads/Posts" link="/ad/john-doe-12384849388" Icon={Camera}/>
-        <DashboardSidebarCard label="Last Ads/Posts" link="/ad/last-5-ads" Icon={Clock5}/>
-        <DashboardSidebarCard label="Post New AD" link="/ad/new-ad" Icon={Plus}/>
-        <DashboardSidebarCard label="Profile" link="/ad/profile?name=john-doe&id=12384849388" Icon={User}/>
-        <CustomeButton title="Log out" className="py-[8px] mt-auto w-fit px-3" />
+        <DashboardSidebarCard
+          label="Dashboard"
+          link="/ad/dashboard"
+          Icon={House}
+        />
+        <DashboardSidebarCard
+          label="My Ads/Posts"
+          link="/ad/posts/john-doe-12384849388"
+          Icon={Camera}
+        />
+        <DashboardSidebarCard
+          label="Last Ads/Posts"
+          link="/ad/last-5-ads"
+          Icon={Clock5}
+        />
+        <DashboardSidebarCard
+          label="Post New AD"
+          link="/ad/new-ad"
+          Icon={Plus}
+        />
+        <DashboardSidebarCard
+          label="Profile"
+          link="/ad/profile/john-doe-12384849388"
+          Icon={User}
+        />
+        <CustomeButton
+          title="Log out"
+          className="py-[8px] mt-auto w-fit px-3"
+        />
       </div>
     </div>
   );
