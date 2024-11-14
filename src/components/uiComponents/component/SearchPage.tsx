@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { FaHome } from "react-icons/fa";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import HomePageCard from "./HomePageCard";
 import { mockCar } from "@/lib/data";
 import { Checkbox } from "@/components/ui/checkbox";

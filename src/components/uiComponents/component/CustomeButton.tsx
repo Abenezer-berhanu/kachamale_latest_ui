@@ -75,7 +75,7 @@ export default function CustomeButton({
       onClick={onClick}
     >
       {isGoogle && <GoogleIcon />}
-      <p>{title}</p>
+      {title}
     </button>
   );
 }
