@@ -8,7 +8,7 @@ export default function page() {
   return (
     <div className="w-full max-w-[1000px] mx-auto">
       <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
-      <DashboardCarTable cars={cars} />
+      <DashboardCarTable cars={cars} action={true} />
     </div>
   );
 }

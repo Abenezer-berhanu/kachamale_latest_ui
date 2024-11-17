@@ -7,8 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { PencilIcon, Trash2 } from "lucide-react";
 
-export default function DashboardCarTable({ cars }: { cars: CarType[] }) {
+export default function DashboardCarTable({
+  cars,
+  action,
+}: {
+  cars: CarType[];
+  action?: boolean;
+}) {
   return (
     <div>
       <Table>
@@ -38,6 +45,16 @@ export default function DashboardCarTable({ cars }: { cars: CarType[] }) {
               <TableCell>{item.color}</TableCell>
               <TableCell>{item.price}</TableCell>
               <TableCell className="text-right">{item.sellerStreet}</TableCell>
+              {action && (
+                <TableCell className="flex justify-end gap-3">
+                  <button className="text-red-500">
+                    <Trash2 size={20} />
+                  </button>
+                  <button>
+                    <PencilIcon size={20} />
+                  </button>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

@@ -1,7 +1,10 @@
-import React from 'react'
+import DashboardAdPostingStepsWrapper from "@/components/uiComponents/component/DashboardAdPostingStepsWrapper";
+import React from "react";
 
 export default function page() {
   return (
-    <div>page</div>
-  )
+    <div className="h-full">
+      <DashboardAdPostingStepsWrapper />
+    </div>
+  );
 }

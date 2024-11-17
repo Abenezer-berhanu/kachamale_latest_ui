@@ -62,16 +62,21 @@ export default function CustomeButton({
   onClick,
   isGoogle,
   className,
+  disabled,
 }: {
   type?: string;
   title: string;
   onClick?: () => void;
   isGoogle?: boolean;
   className?: string;
+  disabled?: boolean;
 }) {
   return (
     <button
-      className={`bg-main_blue rounded-xl text-white font-semibold w-full py-3 flex items-center justify-center gap-2 ${className}`}
+      disabled={disabled}
+      className={`bg-main_blue rounded-lg text-white font-semibold  flex items-center justify-center gap-2 disabled:cursor-not-allowed ${
+        className || "w-full py-3"
+      }`}
       onClick={onClick}
     >
       {isGoogle && <GoogleIcon />}
