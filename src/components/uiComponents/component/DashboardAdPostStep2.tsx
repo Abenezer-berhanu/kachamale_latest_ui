@@ -11,6 +11,7 @@ import { carData, keyFeatures, transmissions } from "@/lib/data";
 import CustomInput from "./CustomInput";
 import { useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
+import { Separator } from "@/components/ui/separator";
 
 export default function DashboardAdPostStep2() {
   const [selected, setSelected] = useState([]);
@@ -63,7 +64,7 @@ export default function DashboardAdPostStep2() {
             <CustomInput label="Car color" placeholder="#8a8d91" />
           </div>
         </div>
-
+        <Separator />
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div className="">
             <CustomInput label="Interior color" placeholder="#8a8d91" />

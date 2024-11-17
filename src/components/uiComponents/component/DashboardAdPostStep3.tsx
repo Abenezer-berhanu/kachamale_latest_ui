@@ -12,6 +12,7 @@ import {
 } from "@/lib/data";
 import CustomInput from "./CustomInput";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
+import { Separator } from "@/components/ui/separator";
 
 export default function DashboardAdPostStep2() {
   return (
@@ -52,6 +53,8 @@ export default function DashboardAdPostStep2() {
             />
           </div>
         </div>
+
+        <Separator />
 
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div className="">

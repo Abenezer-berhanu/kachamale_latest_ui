@@ -10,6 +10,7 @@ import CustomInput from "./CustomInput";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 export default function DashboardAdPostStep4() {
   return (
@@ -43,7 +44,7 @@ export default function DashboardAdPostStep4() {
             <CustomInput label="Price" placeholder="Car Price" type="number" />
           </div>
         </div>
-
+        <Separator />
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div className="">
             <Select>
