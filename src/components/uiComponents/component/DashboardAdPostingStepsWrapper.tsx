@@ -5,7 +5,7 @@ import DashboardAdPostStep3 from "./DashboardAdPostStep3";
 import DashboardAdPostStep2 from "./DashboardAdPostStep2";
 
 export default function DashboardAdPostingStepsWrapper() {
-  const currentStep: number = 2;
+  const currentStep: number = 3;
   return (
     <div className="flex items-center justify-center h-full border">
       {currentStep == 1 ? (
