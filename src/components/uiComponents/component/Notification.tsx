@@ -31,7 +31,7 @@ export default function Notification({
         ></div>
         <div className="flex flex-col overflow-hidden">
           <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium dark:text-white ">
-            <span className="text-sm sm:text-lg">{data.name}</span>
+            <span className="">{data.name}</span>
             <span className="mx-1">·</span>
             <span className="text-xs text-gray-500">{data.time}</span>
           </figcaption>

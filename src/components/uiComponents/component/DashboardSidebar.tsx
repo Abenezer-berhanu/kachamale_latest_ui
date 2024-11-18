@@ -2,9 +2,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
@@ -40,18 +37,42 @@ function DashboardSidebar() {
           <SheetTrigger className="w-12 h-fit border-r flex items-start justify-center">
             <HumbergerMenu />
           </SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
-            </SheetHeader>
+          <SheetContent className="px-0">
+            <div className="w-full h-full flex flex-col border">
+              <DashboardSidebarCard
+                label="Dashboard"
+                link="/ad/dashboard"
+                Icon={House}
+              />
+              <DashboardSidebarCard
+                label="My Ads/Posts"
+                link="/ad/posts/john-doe-12384849388"
+                Icon={Camera}
+              />
+              <DashboardSidebarCard
+                label="Last Ads/Posts"
+                link="/ad/last-5-ads"
+                Icon={Clock5}
+              />
+              <DashboardSidebarCard
+                label="Post New AD"
+                link="/ad/new-ad"
+                Icon={Plus}
+              />
+              <DashboardSidebarCard
+                label="Profile"
+                link="/ad/profile/john-doe-12384849388"
+                Icon={User}
+              />
+              <CustomeButton
+                title="Log out"
+                className="py-[8px] mt-auto w-fit px-3"
+              />
+            </div>
           </SheetContent>
         </Sheet>
       </div>
-      <div className="w-[240px] py-3 shadow-md h-[700px] rounded-lg px-5 flex flex-col">
+      <div className="w-[240px] py-3 shadow-md h-[700px] rounded-lg px-5 flex flex-col max-md:hidden">
         <DashboardSidebarCard
           label="Dashboard"
           link="/ad/dashboard"
