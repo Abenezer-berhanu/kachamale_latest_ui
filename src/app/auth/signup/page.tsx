@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import CustomeButton from "@/components/uiComponents/component/CustomeButton";
-import CustomInput from "@/components/uiComponents/component/CustomInput";
+import SignupForm from "@/components/uiComponents/Forms/SignupForm";
 import Link from "next/link";
 
 export default function page() {
@@ -14,36 +14,14 @@ export default function page() {
           <CustomeButton
             isGoogle={true}
             title="Continue with google"
-            className="my-6"
+            className="my-6 py-2 w-full"
           />
-          <div className="flex gap-1 my-3 w-full items-center justify-center">
-            <Separator className="w-full max-w-[160px]" />
+          <div className="flex gap-1 my-3 w-full items-center justify-center px-2">
+            <Separator className="w-full max-w-[100px]" />
             <p className="text-sm font-semibold">OR</p>
-            <Separator className="w-full max-w-[160px]" />
+            <Separator className="w-full max-w-[100px]" />
           </div>
-          <form action="">
-            <CustomInput label="Full Name" placeholder="John Doe" />
-
-            <CustomInput
-              label="Email"
-              placeholder="Jhon@gmail.com"
-              type="email"
-            />
-
-            <CustomInput
-              label="Password"
-              placeholder="Password"
-              type="password"
-            />
-
-            <CustomInput
-              label="Confirm Password"
-              placeholder="Confirm Password"
-              type="password"
-            />
-
-            <CustomeButton title="Register" className="my-7" />
-          </form>
+          <SignupForm />
 
           <Link
             href={"/auth/signin"}

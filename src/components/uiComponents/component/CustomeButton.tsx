@@ -25,7 +25,7 @@ const GoogleIcon = () => {
           stroke="none"
           strokeWidth="1"
           fill="none"
-          fill-rule="evenodd"
+          fillRule="evenodd"
         >
           <g id="Color-" transform="translate(-401.000000, -860.000000)">
             <g id="Google" transform="translate(401.000000, 860.000000)">
@@ -66,7 +66,7 @@ export default function CustomeButton({
 }: {
   type?: string;
   title: string;
-  onClick?: () => void;
+  onClick?: (e: React.FormEvent) => Promise<void>;
   isGoogle?: boolean;
   className?: string;
   disabled?: boolean;

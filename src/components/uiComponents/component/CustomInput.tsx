@@ -4,13 +4,15 @@ interface PropsInterface {
   label: string;
   placeholder: string;
   className?: string;
-  onChange?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   disabled?: boolean;
+  name?: string;
   props?: any;
 }
 
 export default function CustomInput({
+  name,
   disabled,
   label,
   placeholder,
@@ -23,6 +25,7 @@ export default function CustomInput({
     <div className="flex flex-col gap-2 my-2">
       <b className="text-sm font-semibold">{label}</b>
       <input
+        name={name}
         disabled={disabled}
         placeholder={placeholder}
         onChange={onChange}

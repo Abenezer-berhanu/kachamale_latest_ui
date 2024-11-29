@@ -26,3 +26,10 @@ interface CarType {
   phoneNumber: string;
   payment: string;
 }
+
+interface RegistrationFormType {
+  fullName: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
