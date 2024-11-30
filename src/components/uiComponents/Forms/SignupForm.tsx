@@ -23,7 +23,7 @@ export default function SignupForm() {
       push("/auth/signin");
       return;
     }
-    if (!state?.success) {
+    if (!state?.success && state?.error) {
       toast({
         variant: "destructive",
         title: "Registration Failed",

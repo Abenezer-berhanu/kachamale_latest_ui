@@ -1,12 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth, db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
-  //   signInWithEmailAndPassword,
+  signInWithEmailAndPassword,
   //   signOut,
 } from "firebase/auth";
 import { validateRegistrationFormInputValues } from "@/lib/utils";
+
+export const fetchUserProfile = async (uid: string) => {
+  try {
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+    return userDoc.data();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const registerUser = async (state: any, formData: FormData) => {
   const {
@@ -78,5 +88,28 @@ export const registerUser = async (state: any, formData: FormData) => {
       //@ts-expect-error because the error might not be there
       error: error?.message || "Registration failed please try again",
     };
+  }
+};
+
+export const signInUser = async (state: any, formData: FormData) => {
+  const { email: formDataEmail, password: formDataPassword } =
+    Object.fromEntries(formData);
+  const email = formDataEmail as string;
+  const password = formDataPassword as string;
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const uid = userCredential.user.uid;
+    const userInfo = await fetchUserProfile(uid);
+    return { success: true, data: String(uid + ",sep" + userInfo?.profile) };
+  } catch (error: any) {
+    const textError = String(error);
+    if (textError.includes("auth/invalid-credential")) {
+      return { success: false, error: "Incorrect email or password" };
+    }
+    return { success: false, error: "An error occurred. Please try again." };
   }
 };

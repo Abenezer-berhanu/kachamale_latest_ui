@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import NavbarSearch from "./NavbarSearch";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import NavbarAvatar from "./NavbarAvatar";
 
 export default function Navbar() {
   return (
@@ -37,12 +37,7 @@ export default function Navbar() {
       </div>
 
       {/* Right Side: Avatar */}
-      <div className="flex items-center">
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
+      <NavbarAvatar />  
     </div>
   );
 }
