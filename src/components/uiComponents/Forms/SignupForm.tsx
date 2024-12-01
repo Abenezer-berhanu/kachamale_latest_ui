@@ -21,7 +21,6 @@ export default function SignupForm() {
         description: "User Registered successfully please login",
       });
       push("/auth/signin");
-      return;
     }
     if (!state?.success && state?.error) {
       toast({

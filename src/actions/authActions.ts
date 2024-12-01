@@ -1,3 +1,4 @@
+"use server";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -7,6 +8,7 @@ import {
   //   signOut,
 } from "firebase/auth";
 import { validateRegistrationFormInputValues } from "@/lib/utils";
+import { cookies } from "next/headers";
 
 export const fetchUserProfile = async (uid: string) => {
   try {
@@ -63,7 +65,7 @@ export const registerUser = async (state: any, formData: FormData) => {
       isEmailVerified: false,
     });
 
-    return { success: true, data: user };
+    return { success: true, data: String(user) };
   } catch (error) {
     console.log("error happened at trying to create user", error);
     const errorText = String(error);
@@ -104,6 +106,8 @@ export const signInUser = async (state: any, formData: FormData) => {
     );
     const uid = userCredential.user.uid;
     const userInfo = await fetchUserProfile(uid);
+    const cookieStore = await cookies();
+    cookieStore.set("kachamaleUid", String(uid));
     return { success: true, data: String(uid + ",sep" + userInfo?.profile) };
   } catch (error: any) {
     const textError = String(error);
