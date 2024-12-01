@@ -4,8 +4,7 @@ import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  //   signOut,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 import { validateRegistrationFormInputValues } from "@/lib/utils";
 import { cookies } from "next/headers";
