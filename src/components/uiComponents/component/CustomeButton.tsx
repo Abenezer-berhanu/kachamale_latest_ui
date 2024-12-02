@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 const GoogleIcon = () => {
@@ -66,7 +67,7 @@ export default function CustomeButton({
 }: {
   type?: string;
   title: string;
-  onClick?: (e: React.FormEvent) => Promise<void>;
+  onClick?: (e: React.FormEvent) => Promise<void> | any
   isGoogle?: boolean;
   className?: string;
   disabled?: boolean;

@@ -3,6 +3,7 @@ import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
 import CustomInput from "./CustomInput";
 import Link from "next/link";
 import CustomeButton from "./CustomeButton";
+import ProfileImageUploader from "../functionalComponents/ProfileImageUploader";
 
 export default function ProfileWrapper() {
   return (
@@ -29,9 +30,7 @@ export default function ProfileWrapper() {
             type="tel"
           />
           <div className="grid grid-cols-1 mdMob:grid-cols-2 gap-3">
-            <div className="h-full min-h-28 rounded-lg w-full bg-sky-300 flex items-center justify-center">
-              <p className="text-2xl font-semibold">Upload</p>
-            </div>
+            <ProfileImageUploader />
             <div className="flex flex-col justify-between gap-2">
               <Link href={""}><CustomeButton title="My Posts"/></Link>
               <Link href={""}><CustomeButton title="My Notification"/></Link>
