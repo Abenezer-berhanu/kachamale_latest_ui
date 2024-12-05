@@ -4,14 +4,16 @@ import { auth, db } from "@/lib/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { validateRegistrationFormInputValues } from "@/lib/utils";
 import { cookies } from "next/headers";
 
-export const fetchUserProfile = async (uid: string) => {
+export const fetchUserProfile = async () => {
   try {
-    const userDocRef = doc(db, "users", uid);
+    const cookie = await cookies();
+    const uid = cookie.get("kachamaleUid")?.value;
+    const userDocRef = doc(db, "users", String(uid));
     const userDoc = await getDoc(userDocRef);
     return userDoc.data();
   } catch (error) {
@@ -55,9 +57,12 @@ export const registerUser = async (state: any, formData: FormData) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       name: fullName,
-      profile:
-        user.photoURL ||
-        "https://cdn-icons-png.freepik.com/256/1077/1077114.png?semt=ais_hybrid",
+      profile: {
+        url:
+          user.photoURL ||
+          "https://cdn-icons-png.freepik.com/256/1077/1077114.png?semt=ais_hybrid",
+        id: "12345678910",
+      },
       role: "user",
       phoneNumber: user.phoneNumber,
       uid: user.uid,
@@ -104,7 +109,7 @@ export const signInUser = async (state: any, formData: FormData) => {
       password
     );
     const uid = userCredential.user.uid;
-    const userInfo = await fetchUserProfile(uid);
+    const userInfo = await fetchUserProfile();
     const cookieStore = await cookies();
     cookieStore.set("kachamaleUid", String(uid));
     return { success: true, data: String(uid + ",sep" + userInfo?.profile) };

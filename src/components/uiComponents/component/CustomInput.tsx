@@ -8,6 +8,7 @@ interface PropsInterface {
   type?: string;
   disabled?: boolean;
   name?: string;
+  required?: string;
   props?: any;
 }
 
@@ -18,6 +19,7 @@ export default function CustomInput({
   placeholder,
   className,
   onChange,
+  required,
   type = "text",
   ...props
 }: PropsInterface) {
@@ -31,7 +33,7 @@ export default function CustomInput({
         onChange={onChange}
         className={`rounded-lg indent-3 py-2 border ${className}`}
         type={type}
-        required
+        required={required == "no" ? false : true}
         {...props}
       />
     </div>

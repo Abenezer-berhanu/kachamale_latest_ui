@@ -3,8 +3,11 @@ import Link from "next/link";
 import React from "react";
 import NavbarSearch from "./NavbarSearch";
 import NavbarAvatar from "./NavbarAvatar";
+import { fetchUserProfile } from "@/actions/authActions";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const userInfo = (await fetchUserProfile()) as UserData;
+  const userProfileUrl = userInfo.profile.url as string;
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}
@@ -37,7 +40,7 @@ export default function Navbar() {
       </div>
 
       {/* Right Side: Avatar */}
-      <NavbarAvatar />  
+      <NavbarAvatar userProfileUrl={userProfileUrl} />
     </div>
   );
 }

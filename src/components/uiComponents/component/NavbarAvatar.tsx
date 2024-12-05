@@ -6,15 +6,13 @@ import CustomeButton from "./CustomeButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function NavbarAvatar() {
+export default function NavbarAvatar({userProfileUrl}: {userProfileUrl: string}) {
   const pathname = usePathname();
-  const [profile, setProfile] = useState("https://github.com/shadcn.png");
   const { uid, setUserUid } = useUserStore();
   useLayoutEffect(() => {
     const uid = localStorage.getItem("kachamaleUid") || "";
     if (uid) {
       setUserUid(uid);
-      setProfile(uid.split(",sep")[1]);
     }
   }, [uid]);
 
@@ -24,7 +22,7 @@ export default function NavbarAvatar() {
         <Link href={"/ad/dashboard"}>
           <Avatar>
             <AvatarImage
-              src={profile}
+              src={userProfileUrl}
               alt="@shadcn"
             />
             <AvatarFallback>CN</AvatarFallback>

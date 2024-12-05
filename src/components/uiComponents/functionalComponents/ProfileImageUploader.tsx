@@ -23,7 +23,6 @@ export default function ProfileImageUploader() {
     const reader = new FileReader();
     reader.readAsDataURL(acceptedFiles[0]);
     reader.onload = function () {
-      console.log(reader.result);
       setProfile(reader.result as string);
     };
     reader.onerror = function () {
@@ -34,8 +33,6 @@ export default function ProfileImageUploader() {
         description: "something went wrong please upload the file again",
       });
     };
-
-    console.log(profile);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });

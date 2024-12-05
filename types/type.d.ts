@@ -33,3 +33,25 @@ interface RegistrationFormType {
   password: string;
   passwordConfirm: string;
 }
+
+interface ProfileUpdateFormParamType {
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+  profile?:string;
+}
+
+interface UserData {
+  createdAt: string;
+  email: string;
+  isEmail: boolean;
+  name: string;
+  phoneNumber: string | null;
+  profile: {
+    url: string;
+    id: string;
+  };
+  role: "user" | "admin";
+  uid: string;
+  updatedAt: string;
+}
