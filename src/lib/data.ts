@@ -43,10 +43,10 @@ export const mockCar = [
     sellerCity: "Addis Ababa",
     sellerStreet: "Bole Medhanialem",
     images: [
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png"
     ],
     make: "Hyundai",
     model: "Avante",
@@ -86,10 +86,10 @@ export const mockCar = [
     sellerCity: "Addis Ababa",
     sellerStreet: "Lideta, Near Lion Hotel",
     images: [
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png"
     ],
     make: "Toyota",
     model: "Corolla",
@@ -128,10 +128,10 @@ export const mockCar = [
     sellerCity: "Addis Ababa",
     sellerStreet: "Kazanchis, Near the African Union",
     images: [
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png"
     ],
     make: "Mercedes-Benz",
     model: "C-Class",
@@ -170,10 +170,10 @@ export const mockCar = [
     sellerCity: "Addis Ababa",
     sellerStreet: "Megenagna, Near the Police Station",
     images: [
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png"
     ],
     make: "Nissan",
     model: "X-Trail",
@@ -212,10 +212,10 @@ export const mockCar = [
     sellerCity: "Addis Ababa",
     sellerStreet: "Bole, Next to the Airport",
     images: [
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680103_MTYwMC04MjMtMTlmNGUzMmEwYy0x_xpvjq0.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/bmw-m3-gtr-street-si_chwvv8.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680105_MTYwMC05MzUtNzVkOGFkYzkwMS0x_bujywd.webp",
-      "https://res.cloudinary.com/dg6ck04nm/image/upload/kachamale/5680100_MTYwMC0xMDU5LTliZmMzYWYyNDUtMQ_kl4okl.webp",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png",
+      "https://res.cloudinary.com/dg6ck04nm/image/upload/v1733728839/kachamale/R_hawd84.png"
     ],
     make: "Kia",
     model: "Sportage",

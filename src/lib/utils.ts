@@ -53,3 +53,16 @@ export async function validateRegistrationFormInputValues(
     throw new Error("Password and confirm password must be the same");
   }
 }
+
+export function generateSlug(
+  name: string,
+  year: string | number,
+) {
+  // Convert the name to lowercase and replace spaces or special characters with hyphens
+  const formattedName = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+  // Return the formatted slug
+  return `${formattedName}-${year}`;
+}

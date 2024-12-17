@@ -8,7 +8,6 @@ import { fetchUserProfile } from "./authActions";
 export const updateUserProfile = async (user: ProfileUpdateFormParamType) => {
   try {
     const cookie = await cookies();
-    let profileUrl;
     const uid = cookie.get("kachamaleUid")?.value;
     if (!uid) {
       return { success: false, data: null, error: "Access denied" };

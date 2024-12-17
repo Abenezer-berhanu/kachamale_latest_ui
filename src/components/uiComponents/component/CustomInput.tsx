@@ -9,6 +9,9 @@ interface PropsInterface {
   disabled?: boolean;
   name?: string;
   required?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props?: any;
 }
 
@@ -20,6 +23,7 @@ export default function CustomInput({
   className,
   onChange,
   required,
+  value,
   type = "text",
   ...props
 }: PropsInterface) {
@@ -31,9 +35,10 @@ export default function CustomInput({
         disabled={disabled}
         placeholder={placeholder}
         onChange={onChange}
+        defaultValue={value} // Use defaultValue for uncontrolled input
         className={`rounded-lg indent-3 py-2 border ${className}`}
         type={type}
-        required={required == "no" ? false : true}
+        required={required === "no" ? false : true}
         {...props}
       />
     </div>

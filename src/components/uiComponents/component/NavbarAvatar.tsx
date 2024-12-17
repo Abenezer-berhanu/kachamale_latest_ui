@@ -1,7 +1,7 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUserStore } from "@/hooks/authHook/store";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import CustomeButton from "./CustomeButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

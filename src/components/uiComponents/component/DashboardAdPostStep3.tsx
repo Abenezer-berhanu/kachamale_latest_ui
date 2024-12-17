@@ -3,18 +3,62 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  carBodyTypes,
-  fuelTypes,
-} from "@/lib/data";
+import { carBodyTypes, fuelTypes } from "@/lib/data";
 import CustomInput from "./CustomInput";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
 import { Separator } from "@/components/ui/separator";
+import { useAdPostStore } from "@/hooks/adPostHook/store";
+import { SelectGroup } from "@radix-ui/react-select";
+import { useToast } from "@/hooks/use-toast";
+import CustomeButton from "./CustomeButton";
 
 export default function DashboardAdPostStep2() {
+  const { toast } = useToast();
+  const {
+    body,
+    setBody,
+    mileage,
+    setMileAge,
+    numberOfCylinders,
+    setNumberOfCylinders,
+    isCarRegistered,
+    setIsCarRegistered,
+    fuel,
+    setFuel,
+    seats,
+    setSeats,
+    engineSize,
+    setStep,
+    step,
+    setEngineSize,
+    condition,
+    setCondition,
+  } = useAdPostStore();
+
+  const handleNextClick = () => {
+    if (
+      !body ||
+      !numberOfCylinders ||
+      !isCarRegistered ||
+      !fuel ||
+      !seats ||
+      !engineSize
+    ) {
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "All Fields are required",
+      });
+      return;
+    }
+
+    setStep(step + 1);
+  };
+
   return (
     <DashboardAdPostStepWrapperCard
       step={3}
@@ -23,30 +67,37 @@ export default function DashboardAdPostStep2() {
       <div className="grid grid-cols-1 gap-10">
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div>
-            <Select>
+            <Select onValueChange={(value) => setBody(value)}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select Car Body type" />
+                <SelectValue placeholder={body || "Select Car Body type"} />
               </SelectTrigger>
               <SelectContent>
-                {carBodyTypes.map((item, idx) => (
-                  <SelectItem key={idx} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
+                <SelectGroup>
+                  <SelectLabel>Select Car Body type</SelectLabel>
+                  {carBodyTypes.map((item, idx) => (
+                    <SelectItem key={idx} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
           </div>
 
           <div className="">
             <CustomInput
+              value={mileage}
               label="Mileage"
               placeholder="Enter the car mileage"
               type="number"
+              onChange={(e) => setMileAge(Number(e.target.value))}
             />
           </div>
 
           <div className="">
             <CustomInput
+              value={numberOfCylinders}
+              onChange={(e) => setNumberOfCylinders(Number(e.target.value))}
               label="Number of cylinder"
               placeholder="Number of cylinder"
               type="number"
@@ -58,50 +109,90 @@ export default function DashboardAdPostStep2() {
 
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div className="">
-            <Select>
+            <Select
+              onValueChange={(value: "yes" | "no") => setIsCarRegistered(value)}
+            >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Is this car registered?" />
+                <SelectValue
+                  placeholder={
+                    "Is this car registered?" + isCarRegistered ? "yes" : ""
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value={"Yes"}>Yes</SelectItem>
-                <SelectItem value={"No"}>No</SelectItem>
+                <SelectGroup>
+                  <SelectLabel>Is this car registered?</SelectLabel>
+                  <SelectItem value={"yes"}>Yes</SelectItem>
+                  <SelectItem value={"no"}>No</SelectItem>
+                </SelectGroup>
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex flex-col gap-1.5 my-2">
-            <b className="text-sm font-semibold">Car Transmission</b>
-            <Select>
+            <b className="text-sm font-semibold">Car fuel type</b>
+            <Select onValueChange={(value) => setFuel(value)}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select Car Transmission" />
+                <SelectValue placeholder={fuel || "Select Car fuel type"} />
               </SelectTrigger>
               <SelectContent>
-                {fuelTypes.map((item, idx) => (
-                  <SelectItem key={idx} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
+                <SelectGroup>
+                  <SelectLabel>Select car fuel type</SelectLabel>
+                  {fuelTypes.map((item, idx) => (
+                    <SelectItem key={idx} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
           </div>
 
-
           <div className="">
             <CustomInput
+              value={seats}
               label="Number of seats"
               placeholder="Number of seats"
               type="number"
+              onChange={(e) => setSeats(Number(e.target.value))}
             />
           </div>
 
           <div className="">
             <CustomInput
+              value={engineSize}
               label="Engine size"
               placeholder="Engine size"
               type="number"
+              onChange={(e) => setEngineSize(e.target.value)}
             />
           </div>
+
+          <div className="flex flex-col gap-1.5 my-2">
+            <b className="text-sm font-semibold">Car condition</b>
+            <Select onValueChange={(value) => setCondition(value)}>
+              <SelectTrigger className="w-full">
+                <SelectValue
+                  placeholder={condition || "Select Car condition"}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Select car condition</SelectLabel>
+                  <SelectItem value="Brand new">Brand New</SelectItem>
+                  <SelectItem value="Slightly used">Slightly used</SelectItem>
+                  <SelectItem value="Used">used</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+
+        <CustomeButton
+          title="Next"
+          className="w-fit mt-3 px-5 py-2 ml-auto"
+          onClick={handleNextClick}
+        />
       </div>
     </DashboardAdPostStepWrapperCard>
   );

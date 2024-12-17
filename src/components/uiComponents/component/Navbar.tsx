@@ -7,7 +7,7 @@ import { fetchUserProfile } from "@/actions/authActions";
 
 export default async function Navbar() {
   const userInfo = (await fetchUserProfile()) as UserData;
-  const userProfileUrl = userInfo.profile.url as string;
+  const userProfileUrl = userInfo?.profile.url as string;
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}
