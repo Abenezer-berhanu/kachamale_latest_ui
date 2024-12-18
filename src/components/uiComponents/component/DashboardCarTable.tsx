@@ -19,7 +19,11 @@ export default function DashboardCarTable({
   return (
     <div>
       <Table>
-        <TableCaption>Top 5 expensive cars from your posts</TableCaption>
+        <TableCaption>
+          {cars.length > 0
+            ? "Top 5 expensive cars from your posts"
+            : "You have posted no car yet"}
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Name</TableHead>
@@ -33,16 +37,16 @@ export default function DashboardCarTable({
             <TableRow key={idx}>
               <TableCell className="font-medium w-[240px]">
                 {String(
-                  item?.make +
-                    " " +
-                    item?.model +
-                    " " +
-                    item?.color +
-                    " " +
-                    item?.yearOfManufacture
+                  item?.make + " " + item?.model + " " + item?.yearOfManufacture
                 )}
               </TableCell>
-              <TableCell>{item.color}</TableCell>
+              <TableCell>
+                <div
+                  className="w-4 h-4 rounded-full"
+                  style={{ backgroundColor: item?.color || "transparent" }}
+                  title={item?.color || "Default color"}
+                ></div>
+              </TableCell>
               <TableCell>{item.price}</TableCell>
               <TableCell className="text-right">{item.sellerStreet}</TableCell>
               {action && (
