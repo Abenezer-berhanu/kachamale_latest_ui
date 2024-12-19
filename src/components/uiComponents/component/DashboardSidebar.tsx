@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
-import { Camera, Clock5, House, Plus, User } from "lucide-react";
+import { Camera, House, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
 
 const HumbergerMenu = () => {

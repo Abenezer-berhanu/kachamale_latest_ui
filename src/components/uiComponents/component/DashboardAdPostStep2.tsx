@@ -20,6 +20,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAdPostStore } from "@/hooks/adPostHook/store";
 import CustomeButton from "./CustomeButton";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
 export default function DashboardAdPostStep2() {
   const [keyFeatureSelected, setKeyFeatureSelected] = useState([]);
@@ -125,6 +126,15 @@ export default function DashboardAdPostStep2() {
           </div>
 
           <div>
+            <Link
+            target="_blank"
+              className="text-xs font-semibold text-blue-500"
+              href={
+                "https://www.google.com/search?q=color+picker&oq=color+picker&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBwgCEAAYjwLSAQgzNDkzajBqN6gCCLACAQ&sourceid=chrome&ie=UTF-8"
+              }
+            >
+              Get colors value
+            </Link>
             <CustomInput
               name="carColor"
               label="Car color"
@@ -137,6 +147,15 @@ export default function DashboardAdPostStep2() {
         <Separator />
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
           <div>
+            <Link
+            target="_blank"
+              className="text-xs font-semibold text-blue-500"
+              href={
+                "https://www.google.com/search?q=color+picker&oq=color+picker&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBwgCEAAYjwLSAQgzNDkzajBqN6gCCLACAQ&sourceid=chrome&ie=UTF-8"
+              }
+            >
+              Get colors value
+            </Link>
             <CustomInput
               name="interiorColor"
               label="Interior color"

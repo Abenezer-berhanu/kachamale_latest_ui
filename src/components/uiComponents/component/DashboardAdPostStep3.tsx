@@ -115,7 +115,7 @@ export default function DashboardAdPostStep2() {
               <SelectTrigger className="w-full">
                 <SelectValue
                   placeholder={
-                    "Is this car registered?" + isCarRegistered ? "yes" : ""
+                    "Is this car registered? - Yes"
                   }
                 />
               </SelectTrigger>
