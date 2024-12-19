@@ -1,4 +1,6 @@
 "use client";
+
+import React from "react";
 import { useEffect, useState } from "react";
 import DashboardCarTable from "./DashboardCarTable";
 import { fetchMyCars } from "@/actions/dashboardActions";
@@ -6,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CustomeButton from "./CustomeButton";
 
-export default function DashboardCarsTableWrapper() {
+export default function DashboardMyAdsTableWrapper() {
   const { toast } = useToast();
 
   const searchParam = useSearchParams();
@@ -50,14 +52,14 @@ export default function DashboardCarsTableWrapper() {
   }, [page]);
 
   return (
-    <div>
-      <DashboardCarTable cars={cars} />
+    <>
+      <DashboardCarTable cars={cars} action={true} />
       <CustomeButton
         title="See more"
         onClick={handlePaginationClick}
         className="w-fit px-4 py-2 my-5"
         disabled={totalCars < 8}
       />
-    </div>
+    </>
   );
 }

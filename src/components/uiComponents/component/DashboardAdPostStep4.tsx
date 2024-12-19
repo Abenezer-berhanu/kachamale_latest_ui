@@ -29,7 +29,7 @@ export default function DashboardAdPostStep4() {
   useEffect(() => {
     if (refresh) {
       location.reload();
-      router.push("ad/posts/");
+      router.push("/ad/posts/");
     }
   }, [refresh]);
 

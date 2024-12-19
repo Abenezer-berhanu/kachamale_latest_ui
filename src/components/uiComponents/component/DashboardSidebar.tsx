@@ -48,7 +48,7 @@ function DashboardSidebar() {
               />
               <DashboardSidebarCard
                 label="My Ads/Posts"
-                link="/ad/posts/john-doe-12384849388"
+                link="/ad/posts"
                 Icon={Camera}
               />
               <DashboardSidebarCard
@@ -63,7 +63,7 @@ function DashboardSidebar() {
               />
               <DashboardSidebarCard
                 label="Profile"
-                link="/ad/profile/john-doe-12384849388"
+                link="/ad/profile"
                 Icon={User}
               />
               <CustomeButton
@@ -82,7 +82,7 @@ function DashboardSidebar() {
         />
         <DashboardSidebarCard
           label="My Ads/Posts"
-          link="/ad/posts/john-doe-12384849388"
+          link="/ad/posts"
           Icon={Camera}
         />
         <DashboardSidebarCard
@@ -97,7 +97,7 @@ function DashboardSidebar() {
         />
         <DashboardSidebarCard
           label="Profile"
-          link="/ad/profile/john-doe-12384849388"
+          link="/ad/profile"
           Icon={User}
         />
         <CustomeButton

@@ -15,7 +15,7 @@ const DashboardSidebarCard = ({ Icon, label, link }: PropsInterface) => {
   return (
     <Link
       href={link}
-      className={`flex gap-4 my-1 pl-4 items-center text-gray_text py-2 rounded-lg ${pathname == link && "text-white bg-main_blue"}`}
+      className={`flex gap-4 my-1 pl-4 items-center text-gray_text py-2 rounded-lg ${pathname.includes(link) && "text-white bg-main_blue"}`}
     >
       <Icon />
       <p className="font-bold text-lg">{label}</p>

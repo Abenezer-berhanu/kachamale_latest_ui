@@ -1,3 +1,4 @@
+"use client"
 import {
   Table,
   TableBody,
@@ -16,6 +17,7 @@ export default function DashboardCarTable({
   cars: CarType[];
   action?: boolean;
 }) {
+
   return (
     <div>
       <Table>
