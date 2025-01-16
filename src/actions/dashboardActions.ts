@@ -1,8 +1,18 @@
 "use server";
 import cloudinary from "@/lib/cloudinaryConfig";
 import { db } from "@/lib/firebase";
-import { collection, doc, getCountFromServer, getDocs, getFirestore, limit, query, setDoc, where } from "firebase/firestore";
-import { cookies } from "next/headers";
+import {
+  collection,
+  doc,
+  getCountFromServer,
+  getDocs,
+  getFirestore,
+  limit,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
+// import { cookies } from "next/headers";
 import { v4 as uuid } from "uuid";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,7 +49,7 @@ export async function createCar(carInfo: any) {
 async function getTotalDocumentCount(uid: string) {
   const db = getFirestore();
   const carsCollection = collection(db, "cars"); // Replace "cars" with your collection name
-  
+
   try {
     const carsQuery = query(carsCollection, where("ownerId", "==", uid));
     const snapshot = await getCountFromServer(carsQuery);
@@ -51,10 +61,11 @@ async function getTotalDocumentCount(uid: string) {
   }
 }
 
-export async function fetchMyCars(page:number) {
+export async function fetchMyCars(page: number) {
   try {
-    const cookie = await cookies();
-    const uid = cookie.get("kachamaleUid")?.value;
+    // const cookie = await cookies();
+    // const uid = cookie.get("kachamaleUid")?.value;
+    const uid = "test";
     if (!uid) {
       return {
         success: true,
@@ -63,8 +74,12 @@ export async function fetchMyCars(page:number) {
     }
 
     const carsCollection = collection(db, "cars");
-    const q = query(carsCollection, where("ownerId", "==", uid), limit(page * 8));
-    const totalCars = await getTotalDocumentCount(uid)
+    const q = query(
+      carsCollection,
+      where("ownerId", "==", uid),
+      limit(page * 8)
+    );
+    const totalCars = await getTotalDocumentCount(uid);
     const querySnapshot = await getDocs(q);
 
     const cars = querySnapshot.docs.map((doc) => ({
@@ -72,7 +87,7 @@ export async function fetchMyCars(page:number) {
       ...doc.data(), // Spread the document data
     }));
 
-    return {success: true, cars, totalCars: totalCars}
+    return { success: true, cars, totalCars: totalCars };
   } catch (error) {
     console.log(error);
     return {

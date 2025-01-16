@@ -7,13 +7,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { validateRegistrationFormInputValues } from "@/lib/utils";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 export const fetchUserProfile = async () => {
   try {
-    const cookie = await cookies();
-    const uid = cookie.get("kachamaleUid")?.value;
-    const userDocRef = doc(db, "users", String(uid));
+    // const cookie = await cookies();
+    // const uid = cookie.get("kachamaleUid")?.value;
+    const userDocRef = doc(db, "users", String("test"));
     const userDoc = await getDoc(userDocRef);
     return userDoc.data();
   } catch (error) {
@@ -110,8 +110,8 @@ export const signInUser = async (state: any, formData: FormData) => {
     );
     const uid = userCredential.user.uid;
     const userInfo = await fetchUserProfile();
-    const cookieStore = await cookies();
-    cookieStore.set("kachamaleUid", String(uid));
+    // const cookieStore = await cookies();
+    // cookieStore.set("kachamaleUid", String(uid));
     return { success: true, data: String(uid + ",sep" + userInfo?.profile) };
   } catch (error: any) {
     const textError = String(error);

@@ -14,6 +14,7 @@ import { fetchUserProfile } from "../../../actions/authActions";
 export default function ProfileWrapper() {
   const { refresh } = useRouter();
   const [refetch, setRefetch] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userInfo, setUserInfo]: any | UserData = useState(null);
   const { toast } = useToast();
   const { profile, setProfile, isPending, setIsPending } = useProfileStore();
@@ -36,6 +37,7 @@ export default function ProfileWrapper() {
 
       // Filter out fields with falsy values
       const truthyFields = Object.fromEntries(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         Object.entries(allFields).filter(([_, value]) => Boolean(value))
       );
 
