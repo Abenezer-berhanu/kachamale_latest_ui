@@ -2,14 +2,12 @@
 import cloudinary from "@/lib/cloudinaryConfig";
 import { db } from "@/lib/firebase";
 import { doc, updateDoc } from "firebase/firestore";
-// import { cookies } from "next/headers";
 import { fetchUserProfile } from "./authActions";
+import { getCookie } from "./cookie";
 
 export const updateUserProfile = async (user: ProfileUpdateFormParamType) => {
   try {
-    // const cookie = await cookies();
-    // const uid = cookie.get("kachamaleUid")?.value;
-    const uid = "test";
+    const uid = await getCookie("kachamaleUid");
     if (!uid) {
       return { success: false, data: null, error: "Access denied" };
     }

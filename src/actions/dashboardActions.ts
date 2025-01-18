@@ -12,8 +12,8 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-// import { cookies } from "next/headers";
 import { v4 as uuid } from "uuid";
+import { getCookie } from "./cookie";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createCar(carInfo: any) {
@@ -63,9 +63,7 @@ async function getTotalDocumentCount(uid: string) {
 
 export async function fetchMyCars(page: number) {
   try {
-    // const cookie = await cookies();
-    // const uid = cookie.get("kachamaleUid")?.value;
-    const uid = "test";
+    const uid = await getCookie("kachamaleUid");
     if (!uid) {
       return {
         success: true,
