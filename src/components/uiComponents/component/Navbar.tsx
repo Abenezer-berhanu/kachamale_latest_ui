@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import NavbarSearch from "./NavbarSearch";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import CustomeButton from "./CustomeButton";
+import { SignInButton, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = await currentUser();
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}
@@ -37,12 +40,15 @@ export default function Navbar() {
       </div>
 
       {/* Right Side: Avatar */}
-      <div className="flex items-center">
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
+      {!user ? (
+        <SignInButton mode="modal">
+          <CustomeButton title="Login" className="text-white" />
+        </SignInButton>
+      ) : (
+        <>
+          <UserButton />
+        </>
+      )}
     </div>
   );
 }
