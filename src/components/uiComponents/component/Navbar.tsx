@@ -44,13 +44,18 @@ export default async function Navbar() {
 
       {/* Right Side: Avatar */}
       {!user ? (
-        <SignInButton mode="modal">
-          <CustomeButton title="Login" className="text-white" />
-        </SignInButton>
-      ) : (
         <>
-          <UserButton />
+          <SignInButton mode="modal">
+            <CustomeButton title="Login" className="text-white" />
+          </SignInButton>
         </>
+      ) : (
+        <div className="flex gap-4">
+          <UserButton />
+          <Link href={"/ad/dashboard"}>
+            <CustomeButton title="Dashboard" />
+          </Link>
+        </div>
       )}
     </div>
   );
