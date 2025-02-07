@@ -5,9 +5,12 @@ import NavbarSearch from "./NavbarSearch";
 import CustomeButton from "./CustomeButton";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import { syncUserToDb } from "@/actions/user.actions";
 
 export default async function Navbar() {
   const user = await currentUser();
+
+  if (user) await syncUserToDb();
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}

@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uid             String  @id @default(cuid())
+  clerkId         String  @unique
+  email           String  @unique
+  isEmailVerified Boolean @default(false)
+  name            String
+  phoneNumber     String?
+  role            Role    @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relation
+  profile Profile?
+  Car     Car[]
+
+  @@index([email, isEmailVerified, name, role, clerkId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Profile {
+  id          String  @id @default(uuid())
+  avatarUrl   String?
+  bio         String?
+  location    String?
+  socialLinks String? // Or use String[] if you want an array
+
+  //relation
+  user    User   @relation(fields: [userUid], references: [uid])
+  userUid String @unique
+
+  @@index(id)
+}
+
+model Car {
+  id                   String   @id @default(uuid())
+  body                 String
+  category             String
+  color                String
+  condition            String
+  description          String
+  engineSize           String
+  fuel                 String
+  horsePower           Int
+  interiorColor        String
+  isCarRegistered      String
+  make                 String
+  mileage              Int
+  model                String
+  negotiationAvailable Boolean
+  numberOfCylinders    Int
+  phoneNumber          String
+  price                Int
+  role                 String   @default("owner")
+  seats                Int
+  sellerCity           String
+  sellerStreet         String
+  slug                 String   @unique
+  transmission         String
+  yearOfManufacture    Int
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  authorClerkId        String
+  postType             PostType @default(NORMAL)
+
+  // relations
+  keyFeatures KeyFeature[]
+  images      Image[]
+  author      User         @relation(fields: [authorClerkId], references: [clerkId])
+
+  // add index
+  @@index([authorClerkId, postType, createdAt, yearOfManufacture, transmission, sellerCity, role, price, model, make, body])
+}
+
+enum PostType {
+  NORMAL // normal
+  GOLD // once in a limit amount
+  PREMIUM // 4 - 5 in a limit amount
+}
+
+model Image {
+  id    String  @id @default(uuid())
+  cldId String?
+  url   String
+
+  //relation
+  Car   Car    @relation(fields: [carId], references: [id])
+  carId String
+}
+
+model KeyFeature {
+  id    String @id @default(uuid())
+  label String
+  value String
+
+  //relation
+  Car   Car    @relation(fields: [carId], references: [id])
+  carId String
+}
