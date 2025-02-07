@@ -14,6 +14,7 @@ import citiesList from "@/lib/et";
 import CustomInput from "./CustomInput";
 import { DashboardImageDragAndDrop } from "./DashboardImageDragAndDrop";
 import CustomeButton from "./CustomeButton";
+import { carConditions } from "@/lib/data";
 
 export default function DashboardAdPostStep1() {
   return (
@@ -47,7 +48,29 @@ export default function DashboardAdPostStep1() {
         <DashboardImageDragAndDrop />
       </div>
 
-      <CustomeButton title="Next" className="w-fit mt-3 px-5 py-2 ml-auto" disabled={true}/>
+      <div className="mt-4">
+        <Select>
+          <SelectTrigger className="w-full h-12">
+            <SelectValue placeholder="Select car condition" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select car conditions</SelectLabel>
+              {carConditions.map((city, idx) => (
+                <SelectItem value={city} key={idx}>
+                  {city}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <CustomeButton
+        title="Next"
+        className="w-fit mt-3 px-5 py-2 ml-auto"
+        disabled={true}
+      />
     </DashboardAdPostStepWrapperCard>
   );
 }

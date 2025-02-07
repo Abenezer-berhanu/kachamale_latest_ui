@@ -736,3 +736,5 @@ export const fuelTypes = [
   { label: "Biodiesel", value: "Biodiesel" },
   { label: "Flex Fuel", value: "Flex Fuel" },
 ];
+
+export const carConditions = ["Brand new", "Slightly used", "Used"];

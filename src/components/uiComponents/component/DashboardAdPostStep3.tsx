@@ -70,7 +70,7 @@ export default function DashboardAdPostStep2() {
           </div>
 
           <div className="flex flex-col gap-1.5 my-2">
-            <b className="text-sm font-semibold">Car Transmission</b>
+            <b className="text-sm font-semibold">Car fuel type</b>
             <Select>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select Car Transmission" />
