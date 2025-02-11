@@ -193,7 +193,7 @@ export default function DashboardAdPostStep4() {
               placeholder="Enter the car Horse power"
               type="number"
               value={horsePower}
-              onChange={(e) => setHorsePower(Number(e.target.value))}
+              onChange={(e) => setHorsePower(e.target.value)}
             />
           </div>
 
