@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 interface PropsInterface {
   label: string;
   placeholder: string;
   className?: string;
-  onChange?: () => void;
+  onChange?: (e: any) => void;
   type?: string;
   disabled?: boolean;
+  value?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props?: any;
 }
 
@@ -15,6 +18,7 @@ export default function CustomInput({
   label,
   placeholder,
   className,
+  value,
   onChange,
   type = "text",
   ...props
@@ -28,6 +32,7 @@ export default function CustomInput({
         onChange={onChange}
         className={`rounded-lg indent-3 py-2 border ${className}`}
         type={type}
+        value={value == null ? "" : value}
         required
         {...props}
       />

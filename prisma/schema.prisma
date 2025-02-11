@@ -54,7 +54,7 @@ model Profile {
 model Car {
   id                   String   @id @default(uuid())
   body                 String
-  category             String
+  category             String   @default("car")
   color                String
   condition            String
   description          String
@@ -103,7 +103,7 @@ model Image {
   url   String
 
   //relation
-  Car   Car    @relation(fields: [carId], references: [id])
+  Car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
   carId String
 }
 
@@ -113,6 +113,6 @@ model KeyFeature {
   value String
 
   //relation
-  Car   Car    @relation(fields: [carId], references: [id])
+  Car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
   carId String
 }

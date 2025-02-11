@@ -1,3 +1,4 @@
+"use server";
 import { prisma } from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
@@ -6,7 +7,8 @@ export async function syncUserToDb() {
     const { userId } = await auth();
     const user = await currentUser();
 
-    if (!user || !userId) return;
+    if (!user || !userId)
+      return { error: true, success: false, message: "Access denied" };
 
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -14,7 +16,8 @@ export async function syncUserToDb() {
       },
     });
 
-    if (existingUser) return;
+    if (existingUser)
+      return { error: true, success: false, message: "User already exists" };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [dbUser, _] = await prisma.$transaction([
@@ -61,6 +64,34 @@ export async function syncUserToDb() {
       error: true,
       message: "something went wrong registering user",
       data: null,
+    };
+  }
+}
+
+export async function getUserFromDb() {
+  try {
+    const { userId } = await auth();
+    const user = await currentUser();
+
+    if (!userId || !user)
+      return { success: false, error: true, message: "Access denied" };
+
+    const existUser = await prisma.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+    });
+
+    if (existUser) return { success: true, error: false, message: existUser };
+
+    if (!existUser)
+      return { success: false, error: true, userNotFound: true, message: null };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: true,
+      message: "something went wrong please check your connection",
     };
   }
 }
