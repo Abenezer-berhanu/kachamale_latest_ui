@@ -20,7 +20,7 @@ import { Separator } from "@/components/ui/separator";
 import CustomeButton from "./CustomeButton";
 import { useToast } from "@/hooks/use-toast";
 import { useAdPostStore } from "@/stores/post-store";
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
 
 export default function DashboardAdPostStep2() {
   const [keyFeatureSelected, setKeyFeatureSelected] = useState([]);
@@ -68,6 +68,11 @@ export default function DashboardAdPostStep2() {
     }
 
     setStep(step + 1);
+  };
+
+  const handleBackClick = () => {
+    if (step === 1 || step < 1) return;
+    setStep(step - 1);
   };
 
   return (
@@ -132,12 +137,14 @@ export default function DashboardAdPostStep2() {
               type="color"
               onChange={(e) => setColor(e.target.value)}
             />
-             <Badge style={{ backgroundColor: color ? color : "#8a8d91" }}></Badge>
+            <Badge
+              style={{ backgroundColor: color ? color : "#8a8d91" }}
+            ></Badge>
           </div>
         </div>
         <Separator />
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
-          <div>           
+          <div>
             <CustomInput
               label="Interior color"
               placeholder="#8a8d91"
@@ -145,7 +152,11 @@ export default function DashboardAdPostStep2() {
               value={interiorColor}
               onChange={(e) => setInteriorColor(e.target.value)}
             />
-            <Badge style={{ backgroundColor: interiorColor ? interiorColor : "#8a8d91" }}></Badge>
+            <Badge
+              style={{
+                backgroundColor: interiorColor ? interiorColor : "#8a8d91",
+              }}
+            ></Badge>
           </div>
 
           <div className="flex flex-col gap-1.5 my-2">
@@ -179,11 +190,19 @@ export default function DashboardAdPostStep2() {
             />
           </div>
         </div>
-        <CustomeButton
-          title="Next"
-          className="w-fit mt-3 px-5 py-2 ml-auto"
-          onClick={handleNextClick}
-        />
+        <div className="flex items-center justify-between">
+          <CustomeButton
+            title="Back"
+            disabled={step < 2}
+            className="w-fit mt-3 px-5 py-2"
+            onClick={handleBackClick}
+          />
+          <CustomeButton
+            title="Next"
+            className="w-fit mt-3 px-5 py-2 ml-auto"
+            onClick={handleNextClick}
+          />
+        </div>
       </div>
     </DashboardAdPostStepWrapperCard>
   );

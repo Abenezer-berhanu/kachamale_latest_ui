@@ -57,6 +57,11 @@ export default function DashboardAdPostStep2() {
     setStep(step + 1);
   };
 
+  const handleBackClick = () => {
+    if (step === 1 || step < 1) return;
+    setStep(step - 1);
+  };
+
   return (
     <DashboardAdPostStepWrapperCard
       step={3}
@@ -161,15 +166,21 @@ export default function DashboardAdPostStep2() {
               onChange={(e) => setEngineSize(e.target.value)}
             />
           </div>
-
-          
         </div>
 
-        <CustomeButton
-          title="Next"
-          className="w-fit mt-3 px-5 py-2 ml-auto"
-          onClick={handleNextClick}
-        />
+        <div className="flex items-center justify-between">
+          <CustomeButton
+            title="Back"
+            disabled={step < 2}
+            className="w-fit mt-3 px-5 py-2"
+            onClick={handleBackClick}
+          />
+          <CustomeButton
+            title="Next"
+            className="w-fit mt-3 px-5 py-2 ml-auto"
+            onClick={handleNextClick}
+          />
+        </div>
       </div>
     </DashboardAdPostStepWrapperCard>
   );

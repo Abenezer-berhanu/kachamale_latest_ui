@@ -68,7 +68,7 @@ interface AdPostStoreType {
 }
 
 export const useAdPostStore = create<AdPostStoreType>((set) => ({
-  step: 1,
+  step: 4,
   areYouOwnerOrBroker: null,
   id: uuidv4(),
   slug: null,

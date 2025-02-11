@@ -33,7 +33,9 @@ export default function DashboardAdPostStep4() {
     setAreYouOwnerOrBroker,
     setDescription,
     setPhoneNumber,
+    setStep,
     id,
+    step,
     mileage,
     category,
     sellerCity,
@@ -157,6 +159,11 @@ export default function DashboardAdPostStep4() {
     }
   };
 
+  const handleBackClick = () => {
+    if (step === 1 || step < 1) return;
+    setStep(step - 1);
+  };
+
   return (
     <DashboardAdPostStepWrapperCard
       step={4}
@@ -259,12 +266,20 @@ export default function DashboardAdPostStep4() {
           </div>
         </div>
       </div>
-      <CustomeButton
-        disabled={loading}
-        title={loading ? "submitting..." : "Submit"}
-        className="w-fit mt-3 px-5 py-2 ml-auto"
-        onClick={handleNextClick}
-      />
+      <div className="flex mt-8 items-center justify-between">
+        <CustomeButton
+          title="Back"
+          disabled={step < 2 || loading}
+          className="w-fit mt-3 px-5 py-2"
+          onClick={handleBackClick}
+        />
+        <CustomeButton
+          disabled={loading}
+          title={loading ? "submitting..." : "Submit"}
+          className="w-fit mt-3 px-5 py-2 ml-auto"
+          onClick={handleNextClick}
+        />
+      </div>
     </DashboardAdPostStepWrapperCard>
   );
 }
