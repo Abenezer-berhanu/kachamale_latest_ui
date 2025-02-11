@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const createCar = async (carInfo: CarInfoType) => {
+export const createCar = async (carInfo: CarInfoType | any) => {
   const { userId } = await auth();
   //TODO:
   // CHECK if all info has been sent to our server action

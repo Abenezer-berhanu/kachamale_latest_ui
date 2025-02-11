@@ -64,6 +64,7 @@ interface AdPostStoreType {
   setOwnerId: (id: string | null) => void;
   setNegotiationAvailable: (available: boolean) => void;
   setPhoneNumber: (phone: string | null) => void;
+  resetStore: () => void
 }
 
 export const useAdPostStore = create<AdPostStoreType>((set) => ({
@@ -143,4 +144,36 @@ export const useAdPostStore = create<AdPostStoreType>((set) => ({
   setNegotiationAvailable: (available: boolean) =>
     set({ negotiationAvailable: available }),
   setPhoneNumber: (phone: string | null) => set({ phoneNumber: phone }),
+  resetStore: () =>
+    set({
+      step: 1,
+      areYouOwnerOrBroker: null,
+      id: uuidv4(),
+      slug: null,
+      mileage: 0,
+      category: "car",
+      sellerCity: null,
+      sellerStreet: null,
+      images: [],
+      make: null,
+      model: null,
+      yearOfManufacture: null,
+      color: null,
+      interiorColor: null,
+      condition: null,
+      transmission: null,
+      keyFeatures: [],
+      isCarRegistered: "yes",
+      body: null,
+      fuel: null,
+      seats: 5,
+      numberOfCylinders: null,
+      engineSize: null,
+      horsePower: null,
+      description: null,
+      price: null,
+      ownerId: null,
+      negotiationAvailable: false,
+      phoneNumber: null,
+    }),
 }));

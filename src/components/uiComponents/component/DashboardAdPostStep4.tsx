@@ -58,6 +58,7 @@ export default function DashboardAdPostStep4() {
     price,
     negotiationAvailable,
     phoneNumber,
+    resetStore,
   } = useAdPostStore();
   const handleNextClick = async () => {
     setLoading(true);
@@ -142,6 +143,7 @@ export default function DashboardAdPostStep4() {
           description: String(newCar.message),
         });
 
+        resetStore();
         push("/ad/last-5-ads");
       }
     } catch (error) {
