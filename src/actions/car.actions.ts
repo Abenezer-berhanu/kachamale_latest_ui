@@ -110,3 +110,41 @@ export const createCar = async (carInfo: CarInfoType | any) => {
     };
   }
 };
+
+export const getMyAds = async () => {
+  try {
+    const { userId } = await auth();
+
+    if (!userId)
+      return { success: false, error: true, message: "Access denied" };
+
+    const myAds = await prisma.car.findMany({
+      where: {
+        author: {
+          clerkId: userId,
+        },
+      },
+      select: {
+        body: true,
+        make: true,
+        model: true,
+        color: true,
+        price: true,
+        id: true,
+        sellerCity: true,
+        sellerStreet: true,
+        yearOfManufacture: true
+      },
+      take: Number(process.env.QUERY_LIMIT)
+    });
+
+    return myAds;
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: true,
+      message: "Something went wrong please try again",
+    };
+  }
+};
