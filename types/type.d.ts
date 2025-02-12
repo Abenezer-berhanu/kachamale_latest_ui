@@ -58,3 +58,25 @@ interface CarInfoType {
   images: any;
   authorClerkId: string;
 }
+
+interface UserProfileType {
+  id: string;
+  avatarUrl: string;
+  bio: string | null;
+  location: string | null;
+  socialLinks: string | null;
+  userUid: string;
+}
+
+interface UserType {
+  uid: string;
+  clerkId: string;
+  email: string;
+  isEmailVerified: boolean;
+  name: string;
+  phoneNumber: string;
+  role: "USER" | "ADMIN";
+  createdAt: string;
+  updatedAt: string;
+  profile: UserProfile;
+}

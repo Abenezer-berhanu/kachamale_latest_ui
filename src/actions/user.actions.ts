@@ -95,3 +95,40 @@ export async function getUserFromDb() {
     };
   }
 }
+
+export async function getMyProfile() {
+  try {
+    const { userId } = await auth();
+
+    if (!userId)
+      return { success: false, error: true, message: "Access denied" };
+
+    const existUser = await getUserFromDb();
+
+    if (!existUser)
+      return { success: false, error: true, message: "User not found" };
+
+    const userInfo = await prisma.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+      include: {
+        profile: true,
+      },
+    });
+
+    return {
+      success: true,
+      error: false,
+      message: "user successfully found",
+      data: userInfo,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: false,
+      message: "something went wrong please check your connection",
+    };
+  }
+}
