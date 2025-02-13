@@ -1,6 +1,8 @@
 "use server";
+import cloudinary from "@/lib/cloudinaryConfig";
 import { prisma } from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
 export async function syncUserToDb() {
   try {
@@ -129,6 +131,87 @@ export async function getMyProfile() {
       error: true,
       success: false,
       message: "something went wrong please check your connection",
+    };
+  }
+}
+
+export async function uploadImage(file: string) {
+  try {
+    const uploadedImage = await cloudinary.uploader.upload(file, {
+      folder: "kachamale",
+    });
+    return { url: uploadedImage.secure_url, cldId: uploadedImage.public_id };
+  } catch (error) {
+    console.log("error happend at uploadImage function", error);
+    throw new Error("could not upload image");
+  }
+}
+
+export async function changeProfilePicture(file: string) {
+  try {
+    //check file existence - done
+    // upload the file - done
+    // update user profile url
+
+    if (!file) {
+      return {
+        error: true,
+        success: false,
+        message: "Something went wrong please check your connection",
+      };
+    }
+
+    const { userId } = await auth();
+    const uploadedImage = await uploadImage(file);
+
+    if (!userId || !uploadedImage) {
+      return {
+        error: true,
+        success: false,
+        message: "Something went wrong please check your connection",
+      };
+    }
+
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+      include: {
+        profile: true,
+      },
+    });
+
+    if (!currentUser) {
+      return {
+        error: true,
+        success: false,
+        message: "User not found",
+      };
+    }
+
+    const profileId = currentUser?.profile?.id;
+
+    await prisma.profile.update({
+      where: {
+        id: profileId,
+      },
+      data: {
+        avatarUrl: uploadedImage.url,
+      },
+    });
+
+    revalidatePath("/ad/profile");
+    return {
+      success: true,
+      error: false,
+      message: "Profile updated successfully",
+    };
+  } catch (error) {
+    console.log("error happend at changeProfilePicture function", error);
+    return {
+      error: true,
+      success: false,
+      message: "Something went wrong please check your connection",
     };
   }
 }
