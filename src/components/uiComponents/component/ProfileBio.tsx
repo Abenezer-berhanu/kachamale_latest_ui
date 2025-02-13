@@ -12,6 +12,7 @@ export default function ProfileBio({ bio }: { bio: string }) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     setNewBio(e.target.value);
   };
@@ -36,6 +37,7 @@ export default function ProfileBio({ bio }: { bio: string }) {
         setEnterBio(false);
       }
     } catch (error) {
+      console.log(error);
       toast({
         variant: "destructive",
         description: "Something went wrong please check your connection",

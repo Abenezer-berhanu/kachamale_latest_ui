@@ -5,7 +5,8 @@ import React from "react";
 
 export default function page() {
   const id = 1;
-  const cars = mockCar.filter((car) => car.sellerId === id);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cars: any = mockCar.filter((car) => car.sellerId === id);
   return (
     <div className="min-h-screen grid grid-cols-3 gap-10">
       <div className="w-full col-span-2 max-md:col-span-3">

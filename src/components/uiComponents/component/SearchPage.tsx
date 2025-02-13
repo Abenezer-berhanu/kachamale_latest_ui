@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import HomePageCard from "./HomePageCard";
 import { mockCar } from "@/lib/data";
@@ -7,8 +7,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export default function SearchPage() {
   const [toggled, setToggled] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [width, setWidth] = useState<any>();
   const [collapse, setCollaps] = useState(false);
+
+  useLayoutEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
 
   useEffect(() => {
     if (window.innerWidth < 700) {

@@ -1,12 +1,8 @@
 import React from "react";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
-
 import ProfilePageBanner from "./ProfilePageBanner";
-
-import ProfileFieldCard from "./ProfileFieldCard";
 import { Separator } from "@/components/ui/separator";
 import ProfileDropZone from "./ProfileDropZone";
-import CustomeButton from "./CustomeButton";
 import ProfileBio from "./ProfileBio";
 import ProfilePhoneAndLocation from "./ProfilePhoneAndLocation";
 

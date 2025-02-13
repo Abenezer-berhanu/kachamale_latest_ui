@@ -316,6 +316,7 @@ export async function updateUserPhoneAndLocation(updatedValue: {
 
     const cleanedData = Object.fromEntries(
       Object.entries(updatedValue).filter(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         ([_, value]) => value !== "" && value !== null && value !== undefined
       )
     );
