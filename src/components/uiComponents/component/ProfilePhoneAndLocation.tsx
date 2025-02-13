@@ -92,12 +92,12 @@ export default function ProfilePhoneAndLocation({
         </div>
       </div>
       <div className="flex items-center gap-5">
-        <CustomeButton
+        {showInputs && <CustomeButton
           title={loading ? "updating..." : "Submit"}
           className="text-sm p-2"
           disabled={loading || isInputsEmpty}
           onClick={handleSubmitClick}
-        />
+        />}
         <p
           className="text-green-500 font-semibold cursor-pointer"
           onClick={() => setShowInputs(!showInputs)}

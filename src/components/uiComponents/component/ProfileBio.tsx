@@ -33,7 +33,7 @@ export default function ProfileBio({ bio }: { bio: string }) {
           description: updatedUser.message,
         });
         setNewBio("");
-        setEnterBio(false)
+        setEnterBio(false);
       }
     } catch (error) {
       toast({
@@ -52,7 +52,7 @@ export default function ProfileBio({ bio }: { bio: string }) {
           className="text-green-500 font-semibold cursor-pointer"
           onClick={() => setEnterBio(!enterBio)}
         >
-          Update
+          {enterBio ? "Hide" : "Update"}
         </p>
       </div>
 
