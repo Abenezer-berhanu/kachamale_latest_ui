@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import ProfileDropZone from "./ProfileDropZone";
 import CustomeButton from "./CustomeButton";
 import ProfileBio from "./ProfileBio";
+import ProfilePhoneAndLocation from "./ProfilePhoneAndLocation";
 
 export default function ProfileWrapper({ user }: { user: UserType }) {
   return (
@@ -36,12 +37,10 @@ export default function ProfileWrapper({ user }: { user: UserType }) {
 
         <ProfileBio bio={user?.profile?.bio} />
 
-        <div className="my-8 px-3 grid grid-cols-1 md:grid-cols-2">
-          <ProfileFieldCard title="Phone Number" desc={user?.phoneNumber} />
-          <div className="pl-2 border-l">
-            <ProfileFieldCard title="location" desc={user?.profile.location} />
-          </div>
-        </div>
+        <ProfilePhoneAndLocation
+          phoneNumber={user?.phoneNumber}
+          location={user.profile.location}
+        />
 
         {/* image drop zone */}
         <div className="p-2 flex flex-col gap-2 my-3">

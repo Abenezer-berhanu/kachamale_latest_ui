@@ -281,3 +281,81 @@ export async function changeProfileBio(bio: string) {
     };
   }
 }
+
+export async function updateUserPhoneAndLocation(updatedValue: {
+  phoneNumber: string;
+  location: string;
+}) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return {
+        error: true,
+        success: false,
+        message: "Access Denied",
+      };
+    }
+
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        clerkId: userId,
+      },
+      include: {
+        profile: true,
+      },
+    });
+
+    if (!currentUser) {
+      return {
+        error: true,
+        success: false,
+        message: "User not found",
+      };
+    }
+
+    const cleanedData = Object.fromEntries(
+      Object.entries(updatedValue).filter(
+        ([_, value]) => value !== "" && value !== null && value !== undefined
+      )
+    );
+
+    const profileId = currentUser?.profile?.id;
+
+    if (cleanedData.phoneNumber) {
+      await prisma.user.update({
+        where: {
+          clerkId: userId,
+        },
+        data: {
+          phoneNumber: cleanedData.phoneNumber,
+        },
+      });
+    }
+
+    if (cleanedData.location) {
+      await prisma.profile.update({
+        where: {
+          id: profileId,
+        },
+        data: {
+          location: cleanedData.location,
+        },
+      });
+    }
+
+    revalidatePath("/ad/profile");
+    return {
+      success: true,
+      error: true,
+      message: "Profile updated successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: false,
+      message: "Something went wrong please check your connection",
+    };
+  }
+}
