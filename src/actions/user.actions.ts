@@ -215,3 +215,69 @@ export async function changeProfilePicture(file: string) {
     };
   }
 }
+
+export async function changeProfileBio(bio: string) {
+  try {
+    // check if bio has value
+    // change the bio from the profile
+
+    if (bio.length < 1) {
+      return {
+        error: true,
+        success: false,
+        message: "Please enter a bio before submitting",
+      };
+    } else {
+      const { userId } = await auth();
+
+      if (!userId) {
+        return {
+          error: true,
+          success: false,
+          message: "Access Denied",
+        };
+      }
+
+      const currentUser = await prisma.user.findUnique({
+        where: {
+          clerkId: userId,
+        },
+        include: {
+          profile: true,
+        },
+      });
+
+      if (!currentUser) {
+        return {
+          error: true,
+          success: false,
+          message: "User not found",
+        };
+      }
+
+      const profileId = currentUser?.profile?.id;
+
+      await prisma.profile.update({
+        where: {
+          id: profileId,
+        },
+
+        data: { bio: bio },
+      });
+
+      revalidatePath("/ad/profile");
+      return {
+        success: true,
+        error: false,
+        message: "Profile updated successfully",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: false,
+      message: "Something went wrong please check your connection",
+    };
+  }
+}

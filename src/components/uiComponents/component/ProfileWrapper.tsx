@@ -6,6 +6,8 @@ import ProfilePageBanner from "./ProfilePageBanner";
 import ProfileFieldCard from "./ProfileFieldCard";
 import { Separator } from "@/components/ui/separator";
 import ProfileDropZone from "./ProfileDropZone";
+import CustomeButton from "./CustomeButton";
+import ProfileBio from "./ProfileBio";
 
 export default function ProfileWrapper({ user }: { user: UserType }) {
   return (
@@ -32,9 +34,7 @@ export default function ProfileWrapper({ user }: { user: UserType }) {
         </div>
         <Separator />
 
-        <div className="mt-5 px-3">
-          <ProfileFieldCard title="Bio" desc={user?.profile?.bio} />
-        </div>
+        <ProfileBio bio={user?.profile?.bio} />
 
         <div className="my-8 px-3 grid grid-cols-1 md:grid-cols-2">
           <ProfileFieldCard title="Phone Number" desc={user?.phoneNumber} />
