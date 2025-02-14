@@ -8,8 +8,8 @@ export default function page() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cars: any = mockCar.filter((car) => car.sellerId === id);
   return (
-    <div className="min-h-screen grid grid-cols-3 gap-10">
-      <div className="w-full col-span-2 max-md:col-span-3">
+    <div className="min-h-screen grid grid-cols-3 gap-10 ">
+      <div className="w-full col-span-2 max-md:col-span-3 overflow-x-auto">
         <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
         <DashboardCarTable cars={cars} />
       </div>

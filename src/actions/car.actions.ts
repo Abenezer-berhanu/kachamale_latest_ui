@@ -133,9 +133,9 @@ export const getMyAds = async () => {
         id: true,
         sellerCity: true,
         sellerStreet: true,
-        yearOfManufacture: true
+        yearOfManufacture: true,
       },
-      take: Number(process.env.QUERY_LIMIT)
+      take: Number(process.env.QUERY_LIMIT),
     });
 
     return myAds;
@@ -148,7 +148,6 @@ export const getMyAds = async () => {
     };
   }
 };
-
 
 export const getMyLastAds = async () => {
   try {
@@ -172,12 +171,12 @@ export const getMyLastAds = async () => {
         id: true,
         sellerCity: true,
         sellerStreet: true,
-        yearOfManufacture: true
+        yearOfManufacture: true,
       },
       take: Number(process.env.PERSONAL_QUERY_LIMIT),
       orderBy: {
-        createdAt: "desc"
-      }
+        createdAt: "desc",
+      },
     });
 
     return myAds;
@@ -188,5 +187,21 @@ export const getMyLastAds = async () => {
       error: true,
       message: "Something went wrong please try again",
     };
+  }
+};
+
+export const getSingleCar = async (carId: string) => {
+  try {
+    const car = await prisma.car.findUnique({
+      where: { id: carId },
+      include: {
+        keyFeatures: true,
+        images: true,
+      },
+    });
+
+    return car;
+  } catch (error) {
+    console.log(error);
   }
 };

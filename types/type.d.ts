@@ -1,3 +1,5 @@
+
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CarType {
   id: number | string;
@@ -80,3 +82,5 @@ interface UserType {
   updatedAt: string;
   profile: UserProfile;
 }
+
+

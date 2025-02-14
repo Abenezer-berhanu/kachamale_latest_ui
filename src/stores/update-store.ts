@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 
-interface AdPostStoreType {
+interface AdUpdateStoreType {
   step: number;
   areYouOwnerOrBroker: null | "owner" | "broker" ;   // role
   id: number | string | null;
@@ -67,7 +67,7 @@ interface AdPostStoreType {
   resetStore: () => void
 }
 
-export const useAdPostStore = create<AdPostStoreType>((set) => ({
+export const useAdUpdateStore = create<AdUpdateStoreType>((set) => ({
   step: 1,
   areYouOwnerOrBroker: null,
   id: uuidv4(),

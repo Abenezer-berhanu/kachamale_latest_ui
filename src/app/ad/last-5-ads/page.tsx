@@ -7,7 +7,7 @@ import React, { Suspense } from "react";
 export default async function page() {
   const cars = await getMyLastAds();
   return (
-    <div className="w-full max-w-[1000px] mx-auto">
+    <div className="w-full mx-auto">
       <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
       <Suspense fallback={<Loading />}>
         {/* @ts-expect-error because */}
