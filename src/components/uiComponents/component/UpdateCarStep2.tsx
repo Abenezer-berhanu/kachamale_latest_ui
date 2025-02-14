@@ -24,6 +24,8 @@ import { carData, transmissions } from "@/lib/data";
 import { useAdUpdateStore } from "@/stores/update-store";
 import CustomInput from "./CustomInput";
 import citiesList from "@/lib/et";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 type SingleCarFetchResType = Awaited<ReturnType<typeof getSingleCar>>;
 
@@ -32,6 +34,8 @@ export default function UpdateCarStep2({
 }: {
   carInfo: SingleCarFetchResType;
 }) {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const {
     model,
     setModel,
@@ -56,6 +60,18 @@ export default function UpdateCarStep2({
     negotiationAvailable,
     setNegotiationAvailable,
   } = useAdUpdateStore();
+
+  const handleClick = async (clickedField: string) => {
+    try {
+      console.log(clickedField);
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong please check you connection",
+      });
+    }
+  };
 
   const handleNextClick = () => {
     setStep(step == 1 ? 2 : 1);
@@ -97,7 +113,12 @@ export default function UpdateCarStep2({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("model")}
+                />
               </TableCell>
             </TableRow>
             {/* model close*/}
@@ -133,7 +154,12 @@ export default function UpdateCarStep2({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("negotiationAvailable")}
+                />
               </TableCell>
             </TableRow>
             {/* isNegoation close*/}
@@ -152,7 +178,12 @@ export default function UpdateCarStep2({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("numberOfCylinders")}
+                />
               </TableCell>
             </TableRow>
             {/* number of cylinder close*/}
@@ -171,7 +202,12 @@ export default function UpdateCarStep2({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("phoneNumber")}
+                />
               </TableCell>
             </TableRow>
             {/* phoneNumber close*/}
@@ -192,7 +228,12 @@ export default function UpdateCarStep2({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("price")}
+                />
               </TableCell>
             </TableRow>
             {/* price close*/}
@@ -211,7 +252,12 @@ export default function UpdateCarStep2({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("seats")}
+                />
               </TableCell>
             </TableRow>
             {/* seat close*/}
@@ -241,7 +287,12 @@ export default function UpdateCarStep2({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("sellerCity")}
+                />
               </TableCell>
             </TableRow>
             {/* sellerCity close*/}
@@ -261,7 +312,12 @@ export default function UpdateCarStep2({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("sellerStreet")}
+                />
               </TableCell>
             </TableRow>
             {/* sellerStreet close*/}
@@ -290,7 +346,12 @@ export default function UpdateCarStep2({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("transmission")}
+                />
               </TableCell>
             </TableRow>
             {/* transmission close*/}
@@ -320,7 +381,12 @@ export default function UpdateCarStep2({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("role")}
+                />
               </TableCell>
             </TableRow>
             {/* setRole close*/}
@@ -331,6 +397,7 @@ export default function UpdateCarStep2({
         title="Back"
         className="w-fit py-2 px-4 text-sm mt-auto"
         onClick={handleNextClick}
+        disabled={loading}
       />
     </DashboardAdPostStepWrapperCard>
   );
