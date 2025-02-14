@@ -25,6 +25,8 @@ import { carBodyTypes, carData, fuelTypes } from "@/lib/data";
 import { useAdUpdateStore } from "@/stores/update-store";
 import CustomInput from "./CustomInput";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 type SingleCarFetchResType = Awaited<ReturnType<typeof getSingleCar>>;
 
@@ -33,6 +35,7 @@ export default function UpdateCarTable1({
 }: {
   carInfo: SingleCarFetchResType;
 }) {
+  const [loading, setLoading] = useState(false);
   const {
     setBody,
     body,
@@ -59,6 +62,19 @@ export default function UpdateCarTable1({
 
   const handleNextClick = () => {
     setStep(step == 1 ? 2 : 1);
+  };
+  const { toast } = useToast();
+
+  const handleClick = async (clickedField: string) => {
+    try {
+      console.log(clickedField);
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong please check you connection",
+      });
+    }
   };
 
   return (
@@ -97,7 +113,12 @@ export default function UpdateCarTable1({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("body")}
+                />
               </TableCell>
             </TableRow>
             {/* body close*/}
@@ -128,7 +149,12 @@ export default function UpdateCarTable1({
                 </div>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("color")}
+                />
               </TableCell>
             </TableRow>
             {/* color close*/}
@@ -148,7 +174,12 @@ export default function UpdateCarTable1({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("description")}
+                />
               </TableCell>
             </TableRow>
             {/* description close*/}
@@ -167,7 +198,12 @@ export default function UpdateCarTable1({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("engineSize")}
+                />
               </TableCell>
             </TableRow>
             {/* enginesize close*/}
@@ -194,7 +230,12 @@ export default function UpdateCarTable1({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("fuel")}
+                />
               </TableCell>
             </TableRow>
             {/* fuel close*/}
@@ -213,7 +254,12 @@ export default function UpdateCarTable1({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("horsePower")}
+                />
               </TableCell>
             </TableRow>
             {/* horsepower close*/}
@@ -248,7 +294,12 @@ export default function UpdateCarTable1({
                 </div>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("interiorColor")}
+                />
               </TableCell>
             </TableRow>
             {/* interior close*/}
@@ -280,7 +331,12 @@ export default function UpdateCarTable1({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("isCarRegistered")}
+                />
               </TableCell>
             </TableRow>
             {/* isCarRegistered close*/}
@@ -307,7 +363,12 @@ export default function UpdateCarTable1({
                 </Select>
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("make")}
+                />
               </TableCell>
             </TableRow>
             {/* make close*/}
@@ -326,7 +387,12 @@ export default function UpdateCarTable1({
                 />
               </TableCell>
               <TableCell className="text-right">
-                <CustomeButton title="Submit" className="text-sm p-2" />
+                <CustomeButton
+                  title={loading ? "processing..." : "Submit"}
+                  className="text-sm p-2"
+                  disabled={loading}
+                  onClick={() => handleClick("mileAge")}
+                />
               </TableCell>
             </TableRow>
             {/* mileage close*/}
@@ -337,6 +403,7 @@ export default function UpdateCarTable1({
         title="Next"
         className="w-fit py-2 px-4 text-sm ml-auto"
         onClick={handleNextClick}
+        disabled={loading}
       />
     </DashboardAdPostStepWrapperCard>
   );
