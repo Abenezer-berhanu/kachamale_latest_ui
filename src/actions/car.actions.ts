@@ -215,7 +215,27 @@ export const updateCarField = async (
     // check if the value is truthy
     // update the field using prisma
 
-    console.log(info);
+    // Allowed fields that can have 0 or false as valid values
+    const allowedFalsyFields = [
+      "horsePower",
+      "mileage",
+      "negotiationAvailable",
+      "numberOfCylinders",
+      "price",
+      "seats",
+      "yearOfManufacture",
+    ];
+
+    // Check if any key in info is not in allowedFalsyFields and has a falsy value
+    for (const key in info) {
+      if (!allowedFalsyFields.includes(key) && !info[key]) {
+        return {
+          error: true,
+          success: false,
+          message: "Invalid entry",
+        };
+      }
+    }
 
     if (!info) {
       return {
