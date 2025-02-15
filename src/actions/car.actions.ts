@@ -236,7 +236,7 @@ export const updateCarField = async (
         };
       }
     }
-
+    console.log(info);
     if (!info) {
       return {
         error: true,
@@ -265,7 +265,7 @@ export const updateCarField = async (
     return {
       error: true,
       success: false,
-      message: "something went wrong please check connection",
+      message: "something went wrong please try again",
     };
   }
 };

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import CustomeButton from "./CustomeButton";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
-import { getSingleCar } from "@/actions/car.actions";
+import { getSingleCar, updateCarField } from "@/actions/car.actions";
 import {
   Select,
   SelectContent,
@@ -24,7 +24,7 @@ import { carData, transmissions } from "@/lib/data";
 import { useAdUpdateStore } from "@/stores/update-store";
 import CustomInput from "./CustomInput";
 import citiesList from "@/lib/et";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 type SingleCarFetchResType = Awaited<ReturnType<typeof getSingleCar>>;
@@ -60,11 +60,56 @@ export default function UpdateCarStep2({
     negotiationAvailable,
     setNegotiationAvailable,
   } = useAdUpdateStore();
+  const [refresh, setRefresh] = useState(false);
 
-  const handleClick = async (clickedField: string) => {
+  useEffect(() => {
+    if (refresh) {
+      window.location.reload();
+      setRefresh(false);
+    }
+  }, [refresh]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClick = async (clickedField: string, value: any) => {
     try {
-        setLoading(true)
-      console.log(clickedField);
+      setLoading(true);
+      if (clickedField == "phoneNumber") {
+        if (value.length < 12) {
+          toast({
+            variant: "destructive",
+            description: "please enter a valid phone number",
+          });
+          return;
+        }
+
+        if (!value.includes("+")) {
+          toast({
+            variant: "destructive",
+            description: "phone number must start with '+'",
+          });
+          return;
+        }
+      }
+      const updateInfo = { [clickedField]: value };
+      const updatedCarInfo = await updateCarField(
+        String(carInfo?.id),
+        updateInfo,
+        "/ad/last-5-ads"
+      );
+
+      if (updatedCarInfo?.success) {
+        toast({
+          description: updatedCarInfo?.message,
+        });
+        setRefresh(true);
+      }
+
+      if (updatedCarInfo?.error) {
+        toast({
+          variant: "destructive",
+          description: updatedCarInfo?.message,
+        });
+      }
     } catch (error) {
       console.log(error);
       toast({
@@ -72,7 +117,7 @@ export default function UpdateCarStep2({
         description: "Something went wrong please check you connection",
       });
     } finally {
-        setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -120,7 +165,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("model")}
+                  onClick={() => handleClick("model", model)}
                 />
               </TableCell>
             </TableRow>
@@ -161,7 +206,9 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("negotiationAvailable")}
+                  onClick={() =>
+                    handleClick("negotiationAvailable", negotiationAvailable)
+                  }
                 />
               </TableCell>
             </TableRow>
@@ -185,7 +232,9 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("numberOfCylinders")}
+                  onClick={() =>
+                    handleClick("numberOfCylinders", Number(numberOfCylinders))
+                  }
                 />
               </TableCell>
             </TableRow>
@@ -209,7 +258,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("phoneNumber")}
+                  onClick={() => handleClick("phoneNumber", phoneNumber)}
                 />
               </TableCell>
             </TableRow>
@@ -235,7 +284,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("price")}
+                  onClick={() => handleClick("price", price)}
                 />
               </TableCell>
             </TableRow>
@@ -259,7 +308,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("seats")}
+                  onClick={() => handleClick("seats", Number(seats))}
                 />
               </TableCell>
             </TableRow>
@@ -294,7 +343,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("sellerCity")}
+                  onClick={() => handleClick("sellerCity", sellerCity)}
                 />
               </TableCell>
             </TableRow>
@@ -319,7 +368,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("sellerStreet")}
+                  onClick={() => handleClick("sellerStreet", sellerStreet)}
                 />
               </TableCell>
             </TableRow>
@@ -353,7 +402,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("transmission")}
+                  onClick={() => handleClick("transmission", transmission)}
                 />
               </TableCell>
             </TableRow>
@@ -388,7 +437,7 @@ export default function UpdateCarStep2({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("role")}
+                  onClick={() => handleClick("role", areYouOwnerOrBroker)}
                 />
               </TableCell>
             </TableRow>
