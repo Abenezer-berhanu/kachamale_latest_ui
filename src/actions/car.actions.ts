@@ -205,3 +205,47 @@ export const getSingleCar = async (carId: string) => {
     console.log(error);
   }
 };
+
+export const updateCarField = async (
+  carId: string,
+  info: Record<string, any>,
+  path: string
+) => {
+  try {
+    // check if the value is truthy
+    // update the field using prisma
+
+    console.log(info);
+
+    if (!info) {
+      return {
+        error: true,
+        success: false,
+        message: "invalid entry",
+      };
+    }
+
+    const updatedCar = await prisma.car.update({
+      where: {
+        id: carId,
+      },
+      data: info,
+    });
+
+    if (updatedCar) {
+      revalidatePath(path);
+      return {
+        success: true,
+        error: false,
+        message: "Car information updated successfully",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: false,
+      message: "something went wrong please check connection",
+    };
+  }
+};

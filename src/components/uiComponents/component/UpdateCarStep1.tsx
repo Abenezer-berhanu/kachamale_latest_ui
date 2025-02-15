@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import CustomeButton from "./CustomeButton";
 import DashboardAdPostStepWrapperCard from "./DashboardAdPostStepWrapperCard";
-import { getSingleCar } from "@/actions/car.actions";
+import { getSingleCar, updateCarField } from "@/actions/car.actions";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -25,7 +25,7 @@ import { carBodyTypes, carData, fuelTypes } from "@/lib/data";
 import { useAdUpdateStore } from "@/stores/update-store";
 import CustomInput from "./CustomInput";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 type SingleCarFetchResType = Awaited<ReturnType<typeof getSingleCar>>;
@@ -55,6 +55,7 @@ export default function UpdateCarTable1({
     make,
     setMake,
     mileage,
+    isCarRegistered,
     setMileAge,
     step,
     setStep,
@@ -64,16 +65,54 @@ export default function UpdateCarTable1({
     setStep(step == 1 ? 2 : 1);
   };
   const { toast } = useToast();
+  const [refresh, setRefresh] = useState(false);
 
-  const handleClick = async (clickedField: string) => {
+  useEffect(() => {
+    if (refresh) {
+      window.location.reload();
+      setRefresh(false);
+    }
+  }, [refresh]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClick = async (clickedField: string, value: any) => {
     try {
-      console.log(clickedField);
+      setLoading(true);
+      // give it key and value structure
+      // the use it on calling function
+      // show toast of success
+
+      const typeChangeValue =
+        clickedField == "horsePower" ||
+        clickedField == "mileage" ||
+        clickedField == "numberOfCylinder" ||
+        clickedField == "price" ||
+        clickedField == "seats" ||
+        clickedField == "yearOfManufacture"
+          ? Number(value)
+          : value;
+
+      const updateInfo = { [clickedField]: typeChangeValue };
+
+      const updatedCarInfo = await updateCarField(
+        String(carInfo?.id),
+        updateInfo,
+        "/ad/last-5-ads"
+      );
+      if (updatedCarInfo?.success) {
+        toast({
+          description: updatedCarInfo?.message,
+        });
+      }
+      setRefresh(true);
     } catch (error) {
       console.log(error);
       toast({
         variant: "destructive",
         description: "Something went wrong please check you connection",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,7 +156,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("body")}
+                  onClick={() => handleClick("body", body)}
                 />
               </TableCell>
             </TableRow>
@@ -153,7 +192,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("color")}
+                  onClick={() => handleClick("color", color)}
                 />
               </TableCell>
             </TableRow>
@@ -178,7 +217,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("description")}
+                  onClick={() => handleClick("description", description)}
                 />
               </TableCell>
             </TableRow>
@@ -202,7 +241,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("engineSize")}
+                  onClick={() => handleClick("engineSize", engineSize)}
                 />
               </TableCell>
             </TableRow>
@@ -234,7 +273,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("fuel")}
+                  onClick={() => handleClick("fuel", fuel)}
                 />
               </TableCell>
             </TableRow>
@@ -258,7 +297,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("horsePower")}
+                  onClick={() => handleClick("horsePower", horsePower)}
                 />
               </TableCell>
             </TableRow>
@@ -298,7 +337,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("interiorColor")}
+                  onClick={() => handleClick("interiorColor", interiorColor)}
                 />
               </TableCell>
             </TableRow>
@@ -308,7 +347,9 @@ export default function UpdateCarTable1({
             <TableRow>
               <TableCell className="font-medium">Is car registered</TableCell>
               <TableCell>
-                {carInfo?.isCarRegistered ? "Registered" : "Not Registered"}
+                {carInfo?.isCarRegistered?.toLowerCase() == "yes"
+                  ? "Registered"
+                  : "Not Registered"}
               </TableCell>
               <TableCell className="flex-1 border">
                 <Select
@@ -335,7 +376,9 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("isCarRegistered")}
+                  onClick={() =>
+                    handleClick("isCarRegistered", isCarRegistered)
+                  }
                 />
               </TableCell>
             </TableRow>
@@ -367,7 +410,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("make")}
+                  onClick={() => handleClick("make", make)}
                 />
               </TableCell>
             </TableRow>
@@ -391,7 +434,7 @@ export default function UpdateCarTable1({
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("mileAge")}
+                  onClick={() => handleClick("mileage", Number(mileage))}
                 />
               </TableCell>
             </TableRow>

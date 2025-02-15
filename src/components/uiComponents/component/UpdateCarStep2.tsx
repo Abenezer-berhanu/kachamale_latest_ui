@@ -63,6 +63,7 @@ export default function UpdateCarStep2({
 
   const handleClick = async (clickedField: string) => {
     try {
+        setLoading(true)
       console.log(clickedField);
     } catch (error) {
       console.log(error);
@@ -70,6 +71,8 @@ export default function UpdateCarStep2({
         variant: "destructive",
         description: "Something went wrong please check you connection",
       });
+    } finally {
+        setLoading(false)
     }
   };
 
