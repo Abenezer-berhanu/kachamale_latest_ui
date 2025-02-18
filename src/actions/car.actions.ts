@@ -307,3 +307,29 @@ export const getCarsForHomePage = async () => {
     };
   }
 };
+
+export const getSingleCarBySlug = async (slug: string) => {
+  try {
+    const car = await prisma.car.findUnique({
+      where: { slug: slug },
+      include: {
+        keyFeatures: true,
+        images: true,
+        author: {
+          include: {
+            profile: true,
+          },
+        },
+        _count: {
+          select: {
+            keyFeatures: true,
+          },
+        },
+      },
+    });
+
+    return car;
+  } catch (error) {
+    console.log(error);
+  }
+};

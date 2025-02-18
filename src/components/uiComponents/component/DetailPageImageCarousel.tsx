@@ -6,13 +6,14 @@ export default function DetailPageImageCarousel({
   imageArray,
   noPreview,
 }: {
-  imageArray: string[];
+  imageArray: ImageType[];
   noPreview?: boolean;
 }) {
-  const images: ReactImageGalleryItem[] = imageArray.map((url) => ({
-    original: url,
-    thumbnail: url,
+  const images: ReactImageGalleryItem[] = imageArray.map((img: ImageType) => ({
+    original: img.url,
+    thumbnail: img.url,
   }));
+  
   return (
     <div className="">
       <ImageGallery

@@ -1,5 +1,3 @@
-
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface CarType {
   id: number | string;
@@ -31,13 +29,17 @@ interface CarType {
 }
 
 interface ImageType {
+  id: string;
+  carId: string;
+  cldId: string | null;
   url: string;
-  cldId: string
 }
 
 interface KeyFeaturesType {
+  id: string;
   label: string;
-  value: string
+  value: string;
+  carId: string;
 }
 
 interface CarInfoType {
@@ -92,5 +94,3 @@ interface UserType {
   updatedAt: string;
   profile: UserProfile;
 }
-
-
