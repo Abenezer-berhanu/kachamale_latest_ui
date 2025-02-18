@@ -57,7 +57,7 @@ export default async function Navbar() {
       ) : (
         <div className="flex gap-4">
           <UserButton />
-          <Link href={"/ad/dashboard"}>
+          <Link href={"/ad/posts"}>
             <CustomeButton title="Dashboard" />
           </Link>
         </div>

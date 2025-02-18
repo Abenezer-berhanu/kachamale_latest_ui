@@ -1,11 +1,7 @@
 "use client";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
-import { Camera, Clock5, House, Plus, User } from "lucide-react";
+import { Camera, Clock5, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
 
 const HumbergerMenu = () => {
@@ -40,11 +36,6 @@ function DashboardSidebar() {
           <SheetContent className="px-0">
             <div className="w-full h-full flex flex-col border">
               <DashboardSidebarCard
-                label="Dashboard"
-                link="/ad/dashboard"
-                Icon={House}
-              />
-              <DashboardSidebarCard
                 label="My Ads/Posts"
                 link="/ad/posts/john-doe-12384849388"
                 Icon={Camera}
@@ -74,11 +65,6 @@ function DashboardSidebar() {
       </div>
       <div className="w-[240px] py-3 shadow-md h-[700px] rounded-lg px-5 flex flex-col max-md:hidden">
         <DashboardSidebarCard
-          label="Dashboard"
-          link="/ad/dashboard"
-          Icon={House}
-        />
-        <DashboardSidebarCard
           label="My Ads/Posts"
           link="/ad/posts"
           Icon={Camera}
@@ -93,11 +79,7 @@ function DashboardSidebar() {
           link="/ad/new-ad"
           Icon={Plus}
         />
-        <DashboardSidebarCard
-          label="Profile"
-          link="/ad/profile"
-          Icon={User}
-        />
+        <DashboardSidebarCard label="Profile" link="/ad/profile" Icon={User} />
         <CustomeButton
           title="Log out"
           className="py-[8px] mt-auto w-fit px-3"
