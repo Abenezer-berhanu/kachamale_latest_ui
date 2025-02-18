@@ -3,7 +3,7 @@
 import cloudinary from "@/lib/cloudinaryConfig";
 import { prisma } from "@/lib/prisma";
 import { createImages, createKeyFeatures, validateCarData } from "@/lib/utils";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -266,6 +266,44 @@ export const updateCarField = async (
       error: true,
       success: false,
       message: "something went wrong please try again",
+    };
+  }
+};
+
+export const getCarsForHomePage = async () => {
+  try {
+    const user = await currentUser();
+    const { userId } = await auth();
+
+    if (!user || !userId) {
+      return {
+        error: true,
+        success: true,
+        message: "Access Denied",
+      };
+    }
+
+    const userIdString = String(userId);
+
+    const cars = await prisma.car.findMany({
+      where: {
+        NOT: {
+          authorClerkId: userIdString,
+        },
+      },
+      include: {
+        images: true,
+      },
+      take: 12,
+    });
+
+    return cars;
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: true,
+      message: "Something went wrong please try again",
     };
   }
 };

@@ -14,8 +14,12 @@ interface PropsType {
 }
 
 export default function HomePageCard(props: PropsType) {
+  console.log(props.img);
   return (
-    <Link href={props.slug} className="w-full h-fit shadow-md rounded-lg overflow-hidden flex flex-col gap-1 max-w-[540px]">
+    <Link
+      href={props.slug}
+      className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1 max-w-[540px] max-h-[300px]"
+    >
       <div className="">
         <Image
           src={props.img}
@@ -23,7 +27,7 @@ export default function HomePageCard(props: PropsType) {
           unoptimized
           width={300}
           height={300}
-          className="w-full"
+          className="w-full h-[170px] object-cover"
         />
       </div>
       <div className="p-3">

@@ -7,7 +7,7 @@ interface CarType {
   category: string;
   sellerCity: string;
   sellerStreet: string;
-  images: string[];
+  images: ImageType[];
   make: string;
   model: string;
   yearOfManufacture: number;
@@ -15,7 +15,7 @@ interface CarType {
   interiorColor: string;
   condition: string;
   transmission: string;
-  keyFeatures: string[];
+  keyFeatures: KeyFeaturesType[];
   isCarRegistered: boolean;
   body: string;
   fuel: string;
@@ -28,6 +28,16 @@ interface CarType {
   negotiationAvailable: boolean;
   phoneNumber: string;
   payment: string;
+}
+
+interface ImageType {
+  url: string;
+  cldId: string
+}
+
+interface KeyFeaturesType {
+  label: string;
+  value: string
 }
 
 interface CarInfoType {
