@@ -7,50 +7,49 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 export const createCar = async (carInfo: CarInfoType | any) => {
   const { userId } = await auth();
-  //TODO:
-  // CHECK if all info has been sent to our server action
-  // IF error show the error
-  // Else upload images
-  // and update the car info in the car
-  // create car with author of clerk id userId
 
   if (!userId) {
     return { error: true, success: false, message: "Access denied" };
   }
+
   try {
     const validationErrors = validateCarData(carInfo);
     if (validationErrors?.error) {
-      // TODO: 1
       return { error: true, success: false, message: validationErrors.message };
-    } else {
-      // TODO: 2
-      const uploadedImages = [];
-
-      for (let i = 0; i < carInfo.images.length; i++) {
-        const uploadedImageResponse = await cloudinary.uploader.upload(
-          carInfo.images[i],
-          {
-            folder: "kachamale",
-          }
-        );
-
-        uploadedImages.push({
-          url: uploadedImageResponse.secure_url,
-          cldId: uploadedImageResponse.public_id,
-        });
-      }
-
-      // Replace the images field in carInfo with the uploadedImages array
-      carInfo.images = uploadedImages;
     }
+
+    if (
+      !carInfo.images ||
+      !Array.isArray(carInfo.images) ||
+      carInfo.images.length === 0
+    ) {
+      return { error: true, success: false, message: "No images provided" };
+    }
+
+    const uploadedImages = [];
+    for (let i = 0; i < carInfo.images.length; i++) {
+      const uploadedImageResponse = await cloudinary.uploader.upload(
+        carInfo.images[i],
+        {
+          folder: "kachamale",
+        }
+      );
+
+      uploadedImages.push({
+        url: uploadedImageResponse.secure_url,
+        cldId: uploadedImageResponse.public_id,
+      });
+    }
+
+    carInfo.images = uploadedImages;
 
     const transformedCarInfo = {
       ...carInfo,
-      mileage: Number(carInfo.mileage) || 0, // Convert to number
-      numberOfCylinders: Number(carInfo.numberOfCylinders) || 0, // Convert to number
+      mileage: Number(carInfo.mileage) || 0,
+      numberOfCylinders: Number(carInfo.numberOfCylinders) || 0,
+      horsePower: Number(carInfo.horsePower),
     };
 
     const newCar = await prisma.car.create({
@@ -102,11 +101,11 @@ export const createCar = async (carInfo: CarInfoType | any) => {
       message: "Car created successfully",
     };
   } catch (error) {
-    console.log(error);
+    console.error("Error creating car:", error);
     return {
       error: true,
       success: false,
-      message: "Something went wrong please try again",
+      message: "Something went wrong, please try again",
     };
   }
 };

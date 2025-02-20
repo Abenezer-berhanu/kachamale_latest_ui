@@ -14,7 +14,6 @@ interface PropsType {
 }
 
 export default function HomePageCard(props: PropsType) {
-  console.log(props.img);
   return (
     <Link
       href={props.slug}

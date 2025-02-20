@@ -7,7 +7,7 @@ export default async function HomeCarsListWrapper({ cars }: any) {
     <div className="w-full">
       <p className="text-2xl font-bold mt-12 text-center w-full text-blue-500 opacity-50">
         Something went wrong couldn&rsquo;t get car <br /> please check you
-        connection{" "}
+        connection
       </p>
     </div>
   ) : (
@@ -15,12 +15,12 @@ export default async function HomeCarsListWrapper({ cars }: any) {
       {cars.map((item: CarType, idx: number) => (
         <HomePageCard
           name={String(
-            item?.make + " " + item?.model + " " + " " + item?.yearOfManufacture
+            item?.make + " " + item?.model + " " + item?.yearOfManufacture
           )}
           slug={item.slug}
           horsePower={item.horsePower}
           condition={item.condition}
-          img={item.images[0].url}
+          img={item.images[0]?.url}
           location={String(item.sellerCity + " " + item.sellerStreet)}
           price={item.price}
           transmission={item.transmission}

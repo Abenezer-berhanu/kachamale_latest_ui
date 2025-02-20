@@ -6,6 +6,9 @@ import { revalidatePath } from "next/cache";
 
 export async function syncUserToDb() {
   try {
+    console.log(
+      "user came here while he don't suppose to come sync user db action"
+    );
     const { userId } = await auth();
     const user = await currentUser();
 
@@ -83,6 +86,7 @@ export async function getUserFromDb() {
         clerkId: userId,
       },
     });
+
 
     if (existUser) return { success: true, error: false, message: existUser };
 

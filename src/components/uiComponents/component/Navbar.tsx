@@ -9,13 +9,14 @@ import { getUserFromDb, syncUserToDb } from "@/actions/user.actions";
 
 export default async function Navbar() {
   const user = await currentUser();
-
-  if (!user) {
+  if (user) {
     const existUser = await getUserFromDb();
     if (existUser?.userNotFound) {
       await syncUserToDb();
     }
+    return;
   }
+
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
       {/* Left Side: Logo and Search */}
