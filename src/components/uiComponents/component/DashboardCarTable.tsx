@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash2 } from "lucide-react";
-
 import UpdateCarInfoDialoge from "./UpdateCarInfoDialoge";
+import CarDeleteForm from "./CarDeleteForm";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 export default function DashboardCarTable({
   cars,
@@ -55,11 +56,11 @@ export default function DashboardCarTable({
               {action && (
                 <TableCell className="flex justify-end gap-3">
                   <div className="text-red-500">
-                    <Trash2 />
+                    <CarDeleteForm id={item.id} />
                   </div>
-                  <div>
+                  <Suspense fallback={<Loading />}>
                     <UpdateCarInfoDialoge carId={item.id} />
-                  </div>
+                  </Suspense>
                 </TableCell>
               )}
             </TableRow>

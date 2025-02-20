@@ -9,12 +9,12 @@ import { getUserFromDb, syncUserToDb } from "@/actions/user.actions";
 
 export default async function Navbar() {
   const user = await currentUser();
+
   if (user) {
     const existUser = await getUserFromDb();
     if (existUser?.userNotFound) {
       await syncUserToDb();
     }
-    return;
   }
 
   return (

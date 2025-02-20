@@ -110,6 +110,30 @@ export const createCar = async (carInfo: CarInfoType | any) => {
   }
 };
 
+export const handleDeleteCarClick = async (formData: FormData) => {
+  const carId = formData.get("carId") as string;
+  try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return;
+    }
+
+    const deletedCar = await prisma.car.delete({
+      where: {
+        id: carId,
+      },
+    });
+
+    if (deletedCar) {
+      revalidatePath("/ad/last-5-ads");
+      revalidatePath("/ad/posts");
+    }
+  } catch (error) {
+    console.log("handleDeleteCarClick Action in car action file", error);
+  }
+};
+
 export const getMyAds = async () => {
   try {
     const { userId } = await auth();

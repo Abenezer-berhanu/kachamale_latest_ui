@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function syncUserToDb() {
   try {
     console.log(
-      "user came here while he don't suppose to come sync user db action"
+      "file user.action.ts 10 :- user came here while he doesn't suppose to"
     );
     const { userId } = await auth();
     const user = await currentUser();
