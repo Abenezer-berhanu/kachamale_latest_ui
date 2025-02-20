@@ -298,15 +298,18 @@ export const getCarsForHomePage = async () => {
     const user = await currentUser();
     const { userId } = await auth();
 
-    if (!user || !userId) {
-      return {
-        error: true,
-        success: true,
-        message: "Access Denied",
-      };
-    }
+    const userIdString = String(userId || "");
 
-    const userIdString = String(userId);
+    if (!user || !userId) {
+      const cars = await prisma.car.findMany({
+        include: {
+          images: true,
+        },
+        take: 12,
+      });
+
+      return cars;
+    }
 
     const cars = await prisma.car.findMany({
       where: {
