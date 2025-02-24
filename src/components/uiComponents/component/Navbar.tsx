@@ -5,17 +5,18 @@ import NavbarSearch from "./NavbarSearch";
 import CustomeButton from "./CustomeButton";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { getUserFromDb, syncUserToDb } from "@/actions/user.actions";
+// import { getUserFromDb, syncUserToDb } from "@/actions/user.actions";
 
 export default async function Navbar() {
+  return;
   const user = await currentUser();
 
-  if (user) {
-    const existUser = await getUserFromDb();
-    if (existUser?.userNotFound) {
-      await syncUserToDb();
-    }
-  }
+  // if (user) {
+  //   const existUser = await getUserFromDb();
+  //   if (existUser?.userNotFound) {
+  //     await syncUserToDb();
+  //   }
+  // }
 
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
