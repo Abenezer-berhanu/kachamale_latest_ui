@@ -13,18 +13,19 @@ const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
   title,
   paramKey,
   icon,
-  dependentKey, // The dependent filter (e.g., "model") to clear when changing make
+  dependentKey,
 }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const currentValue = searchParams.get(paramKey);
+  const isActive = currentValue === title.toLowerCase(); // Ensure case consistency
 
   const handleChange = () => {
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (currentValue === title) {
+    if (isActive) {
       newParams.delete(paramKey); // Unselect if already selected
     } else {
       newParams.set(paramKey, title.toLowerCase()); // Update with new make/model
@@ -42,18 +43,20 @@ const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
     <label className="flex items-center gap-2 cursor-pointer">
       <input
         type="checkbox"
-        checked={currentValue === title}
+        checked={isActive} // Ensures active state updates
         onChange={handleChange}
         className="hidden"
       />
       <span
-        className={`p-2 rounded border ${
-          currentValue === title ? "bg-main_blue text-white" : "bg-gray-200"
+        className={`p-2 rounded border transition-all ${
+          isActive ? "bg-main_blue text-white" : "bg-gray-200"
         }`}
       >
         {icon}
       </span>
-      {title}
+      <span className={isActive ? "font-bold text-main_blue" : ""}>
+        {title}
+      </span>
     </label>
   );
 };
