@@ -6,12 +6,14 @@ interface FilterCheckboxProps {
   title: string;
   paramKey: string;
   icon?: React.ReactNode;
+  dependentKey?: string; // The parameter to remove (e.g., "model")
 }
 
 const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
   title,
   paramKey,
   icon,
+  dependentKey, // The dependent filter (e.g., "model") to clear when changing make
 }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -25,7 +27,12 @@ const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
     if (currentValue === title) {
       newParams.delete(paramKey); // Unselect if already selected
     } else {
-      newParams.set(paramKey, title); // Replace with the new value
+      newParams.set(paramKey, title.toLowerCase()); // Update with new make/model
+
+      // Always remove dependentKey (e.g., model) when changing make
+      if (dependentKey) {
+        newParams.delete(dependentKey);
+      }
     }
 
     replace(`${pathname}?${newParams.toString()}`);
@@ -44,7 +51,7 @@ const FilterCheckbox: React.FC<FilterCheckboxProps> = ({
           currentValue === title ? "bg-main_blue text-white" : "bg-gray-200"
         }`}
       >
-        {icon} {/* Render Icon as a component */}
+        {icon}
       </span>
       {title}
     </label>
