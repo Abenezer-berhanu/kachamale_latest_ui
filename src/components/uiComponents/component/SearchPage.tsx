@@ -1,3 +1,4 @@
+"use client";
 import SearchSidebar from "@/components/uiComponents/component/SearchSidebar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -6,8 +7,18 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import SearchPageBreadCrumb from "./SearchPageBreadCrumb";
+import SearchPageBody from "./SearchPageBody";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
-export default function SearchPage() {
+function SearchPage() {
+  const searchParam = useSearchParams();
+
+  useEffect(() => {
+    const querys = Object.fromEntries(searchParam.entries());
+
+    console.log(querys);
+  }, [searchParam]);
   return (
     <div className="relative">
       <SidebarProvider className="">
@@ -20,16 +31,11 @@ export default function SearchPage() {
               <SearchPageBreadCrumb />
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-4">
-            <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-              <div className="aspect-video rounded-xl bg-muted/50" />
-              <div className="aspect-video rounded-xl bg-muted/50" />
-              <div className="aspect-video rounded-xl bg-muted/50" />
-            </div>
-            <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-          </div>
+          <SearchPageBody />
         </SidebarInset>
       </SidebarProvider>
     </div>
   );
 }
+
+export default SearchPage;

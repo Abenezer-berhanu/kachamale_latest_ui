@@ -35,7 +35,6 @@ export default function SearchSidebarModelList() {
         );
         const json = await res.json();
         setModels(json.Results);
-        console.log(json);
       } catch (error) {
         if (error) {
           toast({
