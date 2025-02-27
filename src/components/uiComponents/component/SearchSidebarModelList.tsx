@@ -54,10 +54,18 @@ function SearchSidebarModelList() {
     <SidebarMenu>
       <SidebarMenuItem className="relative max-h-[200px] overflow-y-auto bg-white">
         <SidebarMenuButton asChild className="sticky bg-white top-0 z-10">
-          <p className="font-semibold text-[16px]">Model</p>
+          <p className="font-semibold text-[16px] my-3">Model</p>
         </SidebarMenuButton>
       </SidebarMenuItem>
-      <div className="max-h-[400px] overflow-y-auto">
+      <div
+        className="max-h-[400px] overflow-y-auto [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+      >
         {models.length > 0 ? (
           <Suspense fallback={<Loading />}>
             {models.map((item: ModelResType, idx: number) => (

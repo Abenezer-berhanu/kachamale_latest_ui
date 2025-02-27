@@ -35,13 +35,27 @@ function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="bg-white">
+      <SidebarContent
+        className="bg-white [&::-webkit-scrollbar]:w-4
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+      >
         <SidebarGroup>
           <SidebarMenu>
             {carFilteringData.map((item) => (
               <SidebarMenuItem
                 key={item.title}
-                className="relative max-h-[200px] overflow-y-auto mb-4 bg-white"
+                className="relative max-h-[200px] overflow-y-auto mb-4 bg-white [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
               >
                 <SidebarMenuButton
                   asChild
@@ -84,10 +98,18 @@ function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             <SidebarMenuItem className="relative max-h-[200px] overflow-y-auto bg-white">
               <SidebarMenuButton asChild className="sticky bg-white top-0 z-10">
-                <p className="font-semibold text-[16px]">Make</p>
+                <p className="font-semibold text-[16px] my-1">Make</p>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            <div className="max-h-[400px] overflow-y-auto">
+            <div
+              className="max-h-[400px] overflow-y-auto [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+            >
               <Suspense fallback={<Loading />}>
                 {carMakeAndModel.map((item, idx: number) => (
                   <SidebarMenuSub key={idx}>
