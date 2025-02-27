@@ -17,6 +17,7 @@ import { carFilteringData, carMakeAndModel } from "@/lib/data";
 import SearchSidebarModelList from "./SearchSidebarModelList";
 import Loading from "./Loading";
 import SearchPagePriceFilter from "./SearchPagePriceFilter";
+import Link from "next/link";
 function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props} className="absolute py-5 bg-white">
@@ -24,14 +25,14 @@ function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link href="/search">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <FilterIcon className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Filter by</span>
+                  <span className="font-semibold">Filter by - remove all</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

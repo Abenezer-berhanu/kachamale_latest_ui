@@ -57,7 +57,7 @@ function SearchPageBody() {
       ) : (
         <div className="flex items-center justify-center">
           <p className="font-bold text-2xl text-center text-black/50">
-            No car has found
+            
           </p>
         </div>
       )}
