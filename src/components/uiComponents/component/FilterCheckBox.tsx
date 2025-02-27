@@ -6,9 +6,15 @@ interface FilterCheckboxProps {
   title: string;
   paramKey: string;
   icon?: React.ReactNode;
+  dependentKey?: string; // The parameter to remove (e.g., "model")
 }
 
-function FilterCheckBox({ title, paramKey, icon }: FilterCheckboxProps) {
+function FilterCheckBox({
+  title,
+  paramKey,
+  icon,
+  dependentKey,
+}: FilterCheckboxProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -21,7 +27,12 @@ function FilterCheckBox({ title, paramKey, icon }: FilterCheckboxProps) {
     if (currentValue === title) {
       newParams.delete(paramKey); // Unselect if already selected
     } else {
-      newParams.set(paramKey, title); // Replace with the new value
+      newParams.set(paramKey, title.toLowerCase()); // Update with new make/model
+
+      // Always remove dependentKey (e.g., model) when changing make
+      if (dependentKey) {
+        newParams.delete(dependentKey);
+      }
     }
 
     replace(`${pathname}?${newParams.toString()}`);

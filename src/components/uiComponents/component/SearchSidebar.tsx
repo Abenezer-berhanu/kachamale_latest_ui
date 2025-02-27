@@ -94,6 +94,7 @@ function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <FilterCheckbox
                       icon={React.createElement(item.icon, { size: 16 })}
                       title={item.title}
+                      dependentKey="model"
                       paramKey={item.paramKey
                         .toLowerCase()
                         .replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
