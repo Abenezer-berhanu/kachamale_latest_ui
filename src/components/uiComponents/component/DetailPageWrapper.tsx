@@ -70,23 +70,23 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
             </span>
 
             <div className="w-full my-3 grid grid-cols-2 gap-2">
-              <DetailPageDetailInfoCard title="Make" value={data?.make} />
-              <DetailPageDetailInfoCard title="Model" value={data?.model} />
+              <DetailPageDetailInfoCard title="Make" value={data?.make || ""} />
+              <DetailPageDetailInfoCard title="Model" value={data?.model || ""} />
               <DetailPageDetailInfoCard
                 title="Condition"
-                value={data.condition}
+                value={data.condition || ""}
               />
               <DetailPageDetailInfoCard
                 title="Transmission"
-                value={data.transmission}
+                value={data.transmission || ""}
               />
               <DetailPageDetailInfoCard
                 title="Horse Poser"
-                value={data.horsePower.toString()}
+                value={data.horsePower?.toString() || ""}
               />
               <DetailPageDetailInfoCard
                 title="Engine Size"
-                value={data.engineSize}
+                value={data.engineSize || ""}
               />
             </div>
 
@@ -108,14 +108,14 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
                 negotiation={
                   data.negotiationAvailable ? "Negotiable" : "Unavailable"
                 }
-                yearOfManufacture={data.yearOfManufacture}
-                seats={data.seats}
-                color={data.color}
-                interiorColor={data.interiorColor}
-                bodyType={data.body}
-                fuel={data.fuel}
-                mileAge={data.mileage}
-                numberOfCylinders={data.numberOfCylinders}
+                yearOfManufacture={data.yearOfManufacture || ""}
+                seats={data.seats || ""}
+                color={data.color || ""}
+                interiorColor={data.interiorColor || ""}
+                bodyType={data.body || ""}
+                fuel={data.fuel || ""}
+                mileAge={data.mileage || ""}
+                numberOfCylinders={data.numberOfCylinders || ""}
               />
             </div>
           </div>

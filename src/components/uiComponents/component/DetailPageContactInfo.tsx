@@ -25,7 +25,7 @@ export default function DetailPageContactInfo({
   user,
 }: {
   phone: string;
-  user: UserType;
+  user: UserType | null
 }) {
   const [showPN, setShowPN] = useState(false);
 

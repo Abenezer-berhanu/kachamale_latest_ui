@@ -168,7 +168,7 @@ export default function UpdateCarTable1({
               <TableCell>
                 <Badge
                   style={{
-                    backgroundColor: carInfo?.color,
+                    backgroundColor: carInfo?.color || "",
                   }}
                 ></Badge>
               </TableCell>
@@ -309,7 +309,7 @@ export default function UpdateCarTable1({
               <TableCell>
                 <Badge
                   style={{
-                    backgroundColor: carInfo?.interiorColor,
+                    backgroundColor: carInfo?.interiorColor || "",
                   }}
                 ></Badge>
               </TableCell>
