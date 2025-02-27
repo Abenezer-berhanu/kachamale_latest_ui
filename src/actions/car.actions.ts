@@ -359,3 +359,74 @@ export const getSingleCarBySlug = async (slug: string) => {
     console.log(error);
   }
 };
+
+export async function getFilteredCars(filters: any) {
+  try {
+    const where: any = {};
+
+    // Map frontend params to DB fields
+    if (filters.bodyType) {
+      where.body = { contains: filters.bodyType, mode: "insensitive" };
+    }
+    if (filters.condition) {
+      where.condition = { contains: filters.condition, mode: "insensitive" };
+    }
+    if (filters.fuel) {
+      where.fuel = { contains: filters.fuel, mode: "insensitive" };
+    }
+    if (filters.make) {
+      where.make = { contains: filters.make, mode: "insensitive" };
+    }
+    if (filters.model) {
+      where.model = { contains: filters.model, mode: "insensitive" };
+    }
+    if (filters.transmission) {
+      where.transmission = {
+        contains: filters.transmission,
+        mode: "insensitive",
+      };
+    }
+
+    // Capacity Filtering
+    if (filters.capacity) {
+      if (filters.capacity == "2 to 5 passenger") {
+        where.seats = { lte: 5 };
+      } else if (filters.capacity == "6+ passengers") {
+        where.seats = { gte: 6 };
+      } else {
+        return {
+          error: true,
+          success: false,
+          message: "Invalid capacity value",
+        };
+      }
+    }
+
+    // Year of Manufacture Filtering
+    if (filters.yearOfManufacture) {
+      const years = filters.yearOfManufacture.split(" to ").map(Number);
+      if (years.length === 2 && !isNaN(years[0]) && !isNaN(years[1])) {
+        where.yearOfManufacture = { gte: years[0], lte: years[1] };
+      } else {
+        return { error: true, success: false, message: "Invalid year format" };
+      }
+    }
+
+    // Fetch results from Prisma
+    const cars = await prisma.car.findMany({ where });
+
+    return {
+      error: false,
+      success: true,
+      message: "Successfully filtered",
+      cars: cars,
+    };
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    return {
+      error: true,
+      success: false,
+      message: "An error occurred while fetching cars",
+    };
+  }
+}

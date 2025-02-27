@@ -1,25 +1,57 @@
 "use client";
+import { useToast } from "@/hooks/use-toast";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
+import Loading from "./Loading";
+import { debounce } from "lodash";
+import { getFilteredCars } from "@/actions/car.actions";
 
 function SearchPageBody() {
   const searchParam = useSearchParams();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
 
+  // Optimized API call with debounce
+  const fetchFilteredCars = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    debounce(async (filters: any) => {
+      setLoading(true);
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const res: any = await getFilteredCars(filters);
+        if (res.error) {
+          toast({
+            variant: "destructive",
+            description: res.message, // Use the correct error message
+          });
+        } else {
+          setData(res.cars);
+        }
+      } catch (error) {
+        if (error) {
+          toast({
+            variant: "destructive",
+            description: "Something went wrong. Please try again.",
+          });
+        }
+      } finally {
+        setLoading(false);
+      }
+    }, 500),
+    []
+  );
+
+  // Fetch cars when params change
   useEffect(() => {
-    const querys = Object.fromEntries(searchParam.entries());
+    const queries = Object.fromEntries(searchParam.entries());
+    fetchFilteredCars(queries);
+  }, [searchParam, fetchFilteredCars]);
 
-    console.log(querys);
-  }, [searchParam]);
   return (
     <div>
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-      </div>
+      {loading && <Loading />}
+      <p>Results: {data.length}</p>
     </div>
   );
 }
