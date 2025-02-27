@@ -16,6 +16,7 @@ import FilterCheckbox from "./FilterCheckBox";
 import { carFilteringData, carMakeAndModel } from "@/lib/data";
 import SearchSidebarModelList from "./SearchSidebarModelList";
 import Loading from "./Loading";
+import SearchPagePriceFilter from "./SearchPagePriceFilter";
 function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props} className="absolute py-5 bg-white">
@@ -44,6 +45,9 @@ function SearchSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
       >
+        <Suspense fallback={<Loading />}>
+          <SearchPagePriceFilter />
+        </Suspense>
         <SidebarGroup>
           <SidebarMenu>
             {carFilteringData.map((item) => (

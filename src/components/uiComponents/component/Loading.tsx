@@ -3,7 +3,7 @@ import { HashLoader } from "react-spinners";
 
 export default function Loading() {
   return (
-    <div>
+    <div className="flex items-center justify-center w-full h-full">
       <HashLoader size={20} />
     </div>
   );

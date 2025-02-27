@@ -430,3 +430,31 @@ export async function getFilteredCars(filters: any) {
     };
   }
 }
+
+export async function getMaxPrice() {
+  try {
+    const maxPrice = await prisma.car.aggregate({
+      _max: {
+        price: true,
+      },
+    });
+
+    return maxPrice;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getMinPrice() {
+  try {
+    const minPrice = await prisma.car.aggregate({
+      _min: {
+        price: true,
+      },
+    });
+
+    return minPrice;
+  } catch (error) {
+    console.log(error);
+  }
+}

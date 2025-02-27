@@ -49,9 +49,18 @@ function SearchPageBody() {
   }, [searchParam, fetchFilteredCars]);
 
   return (
-    <div>
-      {loading && <Loading />}
-      <p>Results: {data.length}</p>
+    <div className="min-h-svh">
+      {loading ? (
+        <Loading />
+      ) : data.length > 0 ? (
+        <p>{data.length}</p>
+      ) : (
+        <div className="flex items-center justify-center">
+          <p className="font-bold text-2xl text-center text-black/50">
+            No car has found
+          </p>
+        </div>
+      )}
     </div>
   );
 }
