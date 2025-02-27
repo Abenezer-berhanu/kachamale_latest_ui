@@ -6,7 +6,7 @@ interface FilterCheckboxProps {
   title: string;
   paramKey: string;
   icon?: React.ReactNode;
-  dependentKey?: string; // The parameter to remove (e.g., "model")
+  dependentKey?: string;
 }
 
 function FilterCheckBox({
@@ -20,16 +20,16 @@ function FilterCheckBox({
   const { replace } = useRouter();
 
   const currentValue = searchParams.get(paramKey);
+  const isActive = currentValue === title.toLowerCase();
 
   const handleChange = () => {
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (currentValue === title) {
-      newParams.delete(paramKey); // Unselect if already selected
+    if (isActive) {
+      newParams.delete(paramKey);
     } else {
-      newParams.set(paramKey, title.toLowerCase()); // Update with new make/model
+      newParams.set(paramKey, title.toLowerCase());
 
-      // Always remove dependentKey (e.g., model) when changing make
       if (dependentKey) {
         newParams.delete(dependentKey);
       }
@@ -42,18 +42,20 @@ function FilterCheckBox({
     <label className="flex items-center gap-2 cursor-pointer">
       <input
         type="checkbox"
-        checked={currentValue === title}
+        checked={isActive}
         onChange={handleChange}
         className="hidden"
       />
       <span
-        className={`p-2 rounded border ${
-          currentValue === title ? "bg-main_blue text-white" : "bg-gray-200"
+        className={`p-2 rounded border transition-all ${
+          isActive ? "bg-main_blue text-white" : "bg-gray-200"
         }`}
       >
         {icon} {/* Render Icon as a component */}
       </span>
-      {title}
+      <span className={isActive ? "font-bold text-main_blue" : ""}>
+        {title}
+      </span>
     </label>
   );
 }
