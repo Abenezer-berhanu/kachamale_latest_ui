@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { carData, transmissions } from "@/lib/data";
+import { transmissions } from "@/lib/data";
 import { useAdUpdateStore } from "@/stores/update-store";
 import CustomInput from "./CustomInput";
 import citiesList from "@/lib/et";
@@ -37,8 +37,8 @@ export default function UpdateCarStep2({
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const {
-    model,
-    setModel,
+    mileage,
+    setMileAge,
     numberOfCylinders,
     setNumberOfCylinders,
     phoneNumber,
@@ -139,37 +139,29 @@ export default function UpdateCarStep2({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {/* model */}
-            <TableRow>
-              <TableCell className="font-medium">Model</TableCell>
-              <TableCell>{carInfo?.model}</TableCell>
+           {/* mileage */}
+           <TableRow>
+              <TableCell className="font-medium">Mile age</TableCell>
+              <TableCell>{carInfo?.mileage}</TableCell>
               <TableCell className="flex-1 border">
-                <Select onValueChange={(value) => setModel(value)}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder={model || "Select Car Model"} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Select Car Model</SelectLabel>
-                      {carData[0].models.map((item, idx) => (
-                        <SelectItem key={idx} value={item}>
-                          {item}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <CustomInput
+                  value={mileage}
+                  label=""
+                  placeholder="Enter the car mileage"
+                  type="number"
+                  onChange={(e) => setMileAge(e.target.value)}
+                />
               </TableCell>
               <TableCell className="text-right">
                 <CustomeButton
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("model", model)}
+                  onClick={() => handleClick("mileage", Number(mileage))}
                 />
               </TableCell>
             </TableRow>
-            {/* model close*/}
+            {/* mileage close*/}
 
             {/* isNegotationAvailable */}
             <TableRow>
@@ -445,6 +437,7 @@ export default function UpdateCarStep2({
           </TableBody>
         </Table>
       </div>
+
       <CustomeButton
         title="Back"
         className="w-fit py-2 px-4 text-sm mt-auto"

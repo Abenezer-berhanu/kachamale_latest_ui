@@ -27,6 +27,7 @@ import CustomInput from "./CustomInput";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import CarUpdateCarModelComponent from "./CarUpdateCarModelComponenst";
 
 type SingleCarFetchResType = Awaited<ReturnType<typeof getSingleCar>>;
 
@@ -54,9 +55,9 @@ export default function UpdateCarTable1({
     setIsCarRegistered,
     make,
     setMake,
-    mileage,
+    setModel,
     isCarRegistered,
-    setMileAge,
+    model,
     step,
     setStep,
   } = useAdUpdateStore();
@@ -416,32 +417,27 @@ export default function UpdateCarTable1({
             </TableRow>
             {/* make close*/}
 
-            {/* mileage */}
+            {/* model */}
             <TableRow>
-              <TableCell className="font-medium">Mile age</TableCell>
-              <TableCell>{carInfo?.mileage}</TableCell>
+              <TableCell className="font-medium">Model</TableCell>
+              <TableCell>{carInfo?.model}</TableCell>
               <TableCell className="flex-1 border">
-                <CustomInput
-                  value={mileage}
-                  label=""
-                  placeholder="Enter the car mileage"
-                  type="number"
-                  onChange={(e) => setMileAge(e.target.value)}
-                />
+                <CarUpdateCarModelComponent />
               </TableCell>
               <TableCell className="text-right">
                 <CustomeButton
                   title={loading ? "processing..." : "Submit"}
                   className="text-sm p-2"
                   disabled={loading}
-                  onClick={() => handleClick("mileage", Number(mileage))}
+                  onClick={() => handleClick("model", model)}
                 />
               </TableCell>
             </TableRow>
-            {/* mileage close*/}
+            {/* model close*/}
           </TableBody>
         </Table>
       </div>
+
       <CustomeButton
         title="Next"
         className="w-fit py-2 px-4 text-sm ml-auto"
