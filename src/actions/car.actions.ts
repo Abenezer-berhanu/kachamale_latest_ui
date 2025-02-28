@@ -389,9 +389,9 @@ export async function getFilteredCars(filters: any) {
 
     // Capacity Filtering
     if (filters.capacity) {
-      if (filters.capacity == "2 to 5 passenger") {
+      if (filters.capacity === "2 to 5 passenger") {
         where.seats = { lte: 5 };
-      } else if (filters.capacity == "6+ passengers") {
+      } else if (filters.capacity === "6+ passenger") {
         where.seats = { gte: 6 };
       } else {
         return {
@@ -412,8 +412,21 @@ export async function getFilteredCars(filters: any) {
       }
     }
 
+    // Price Filtering
+    if (filters.price) {
+      const price = Number(filters.price);
+      if (!isNaN(price) && price > 0) {
+        where.price = { lte: price };
+      } else {
+        return { error: true, success: false, message: "Invalid price value" };
+      }
+    }
+
     // Fetch results from Prisma
-    const cars = await prisma.car.findMany({ where });
+    const cars = await prisma.car.findMany({
+      where,
+      include: { images: true },
+    });
 
     return {
       error: false,
