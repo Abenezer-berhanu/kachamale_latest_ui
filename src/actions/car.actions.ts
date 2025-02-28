@@ -52,6 +52,7 @@ export const createCar = async (carInfo: CarInfoType | any) => {
       horsePower: Number(carInfo.horsePower),
     };
 
+
     const newCar = await prisma.car.create({
       data: {
         body: transformedCarInfo.body,
@@ -72,7 +73,7 @@ export const createCar = async (carInfo: CarInfoType | any) => {
         phoneNumber: transformedCarInfo.phoneNumber,
         price: transformedCarInfo.price,
         role: transformedCarInfo.role,
-        seats: transformedCarInfo.seats,
+        seats: Number(transformedCarInfo.seats),
         sellerCity: transformedCarInfo.sellerCity,
         sellerStreet: transformedCarInfo.sellerStreet,
         slug: transformedCarInfo.slug,
@@ -389,9 +390,9 @@ export async function getFilteredCars(filters: any) {
 
     // Capacity Filtering
     if (filters.capacity) {
-      if (filters.capacity === "2 to 5 passenger") {
+      if (filters.capacity == "2 to 5 passenger") {
         where.seats = { lte: 5 };
-      } else if (filters.capacity === "6+ passenger") {
+      } else if (filters.capacity == "6+ passenger") {
         where.seats = { gte: 6 };
       } else {
         return {
