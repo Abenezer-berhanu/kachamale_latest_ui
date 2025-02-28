@@ -55,7 +55,6 @@ export default function UpdateCarTable1({
     setIsCarRegistered,
     make,
     setMake,
-    setModel,
     isCarRegistered,
     model,
     step,
