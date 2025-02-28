@@ -607,7 +607,7 @@ export const carData = [
   },
 ];
 
-export const transmissions = ["automatic", "manual"];
+export const transmissions = ["automatic", "manual", "AMT", "CVT"];
 
 export const keyFeatures = [
   { label: "Air Conditioning", value: "Air Conditioning" },
@@ -746,7 +746,7 @@ export const fuelTypes = [
   { label: "Flex Fuel", value: "Flex Fuel" },
 ];
 
-export const carConditions = ["Brand new", "Slightly used", "Used"];
+export const carConditions = ["Brand new", "Foreign used", "Local used"];
 
 // This is sample data.
 export const carFilteringData = [

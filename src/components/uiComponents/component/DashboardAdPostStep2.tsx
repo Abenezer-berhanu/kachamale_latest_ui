@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  carData,
+  carMakeAndModel,
   keyFeatures as keyFeatureData,
   transmissions,
 } from "@/lib/data";
@@ -21,6 +21,7 @@ import CustomeButton from "./CustomeButton";
 import { useToast } from "@/hooks/use-toast";
 import { useAdPostStore } from "@/stores/post-store";
 import { Badge } from "@/components/ui/badge";
+import CarPostingCarModelComponent from "./CarPostingCarModelComponent";
 
 export default function DashboardAdPostStep2() {
   const [keyFeatureSelected, setKeyFeatureSelected] = useState([]);
@@ -30,7 +31,6 @@ export default function DashboardAdPostStep2() {
     make,
     setMake,
     model,
-    setModel,
     yearOfManufacture,
     setYearOfManufacture,
     color,
@@ -82,6 +82,7 @@ export default function DashboardAdPostStep2() {
     >
       <div className="grid grid-cols-1 gap-10">
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
+          {/* make */}
           <div>
             <Select onValueChange={(value) => setMake(value)}>
               <SelectTrigger className="w-full">
@@ -90,35 +91,19 @@ export default function DashboardAdPostStep2() {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Select Car Make</SelectLabel>
-                  {carData.map((item, idx) => (
-                    <SelectItem key={idx} value={item.make}>
-                      {item.make}
+                  {carMakeAndModel.map((item, idx) => (
+                    <SelectItem key={idx} value={item.title}>
+                      {item.title}
                     </SelectItem>
                   ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
+          {/* model */}
+          <CarPostingCarModelComponent />
 
-          <div className="my-2 flex flex-col gap-1.5">
-            <b className="text-sm font-semibold">Car model</b>
-            <Select onValueChange={(value) => setModel(value)}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={model || "Select Car Model"} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Select Car Model</SelectLabel>
-                  {carData[0].models.map((item, idx) => (
-                    <SelectItem key={idx} value={item}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-
+          {/* year of manufacture */}
           <div>
             <CustomInput
               label="Manufacture Year"
@@ -129,6 +114,7 @@ export default function DashboardAdPostStep2() {
             />
           </div>
 
+          {/* color */}
           <div>
             <CustomInput
               label="Car color"
@@ -144,6 +130,7 @@ export default function DashboardAdPostStep2() {
         </div>
         <Separator />
         <div className="border p-4 flex flex-col justify-between rounded-lg shadow-md">
+          {/* interior color */}
           <div>
             <CustomInput
               label="Interior color"
@@ -159,6 +146,7 @@ export default function DashboardAdPostStep2() {
             ></Badge>
           </div>
 
+          
           <div className="flex flex-col gap-1.5 my-2">
             <b className="text-sm font-semibold">Car Transmission</b>
             <Select onValueChange={(value) => setTransmission(value)}>
