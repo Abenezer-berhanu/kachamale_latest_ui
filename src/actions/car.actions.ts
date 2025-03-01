@@ -1,5 +1,5 @@
 "use server";
-
+import { v4 as uuidv4 } from "uuid";
 import cloudinary from "@/lib/cloudinaryConfig";
 import { prisma } from "@/lib/prisma";
 import { createImages, createKeyFeatures, validateCarData } from "@/lib/utils";
@@ -44,6 +44,7 @@ export const createCar = async (carInfo: CarInfoType | any) => {
     }
 
     carInfo.images = uploadedImages;
+    const slug = uuidv4();
 
     const transformedCarInfo = {
       ...carInfo,
@@ -75,7 +76,7 @@ export const createCar = async (carInfo: CarInfoType | any) => {
         seats: Number(transformedCarInfo.seats),
         sellerCity: transformedCarInfo.sellerCity,
         sellerStreet: transformedCarInfo.sellerStreet,
-        slug: transformedCarInfo.slug,
+        slug: slug,
         transmission: transformedCarInfo.transmission,
         yearOfManufacture: transformedCarInfo.yearOfManufacture,
         author: {
@@ -437,7 +438,7 @@ export async function getFilteredCars(filters: any) {
     // Fetch results from Prisma
     const cars = await prisma.car.findMany({
       where,
-      include: { images: true,keyFeatures: true },
+      include: { images: true, keyFeatures: true },
     });
 
     return {
