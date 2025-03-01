@@ -6,16 +6,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function generateSlug(name: string, year: string | number) {
-  // Convert the name to lowercase and replace spaces or special characters with hyphens
-  const formattedName = name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-  // Return the formatted slug
-  return `${formattedName}-${year}`;
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function validateCarData(carInfo: any) {
   const requiredFields = [

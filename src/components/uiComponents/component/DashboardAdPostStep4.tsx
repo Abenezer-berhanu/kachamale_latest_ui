@@ -16,7 +16,6 @@ import { SelectGroup } from "@radix-ui/react-select";
 import { useToast } from "@/hooks/use-toast";
 import CustomeButton from "./CustomeButton";
 import { useState } from "react";
-import { generateSlug } from "@/lib/utils";
 import { useAdPostStore } from "@/stores/post-store";
 import { createCar } from "@/actions/car.actions";
 import { useRouter } from "next/navigation";
@@ -100,13 +99,9 @@ export default function DashboardAdPostStep4() {
       return;
     }
 
-    // generate slug
-    const name = make! + model!;
-    const generatedSlug = generateSlug(name, yearOfManufacture!);
     const carInfo = {
       role: areYouOwnerOrBroker,
       id,
-      slug: generatedSlug,
       mileage,
       category,
       sellerCity,
