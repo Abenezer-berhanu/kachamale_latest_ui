@@ -1,10 +1,19 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function NavbarSearch() {
+  const pathname = usePathname();
+
+  if (pathname.includes("/search")) {
+    return;
+  }
   return (
     <div className="relative flex ">
-      <Link href="/search" className="bg-slate-100 px-3 rounded-full h-12 flex items-center justify-center">
+      <Link
+        href="/search"
+        className="bg-slate-100 px-3 rounded-full h-12 flex items-center justify-center"
+      >
         <svg
           width="25"
           height="25"
@@ -23,4 +32,3 @@ export default function NavbarSearch() {
     </div>
   );
 }
-

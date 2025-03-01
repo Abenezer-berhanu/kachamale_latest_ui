@@ -52,7 +52,6 @@ export const createCar = async (carInfo: CarInfoType | any) => {
       horsePower: Number(carInfo.horsePower),
     };
 
-
     const newCar = await prisma.car.create({
       data: {
         body: transformedCarInfo.body,
@@ -365,6 +364,18 @@ export async function getFilteredCars(filters: any) {
   try {
     const where: any = {};
 
+    if (filters.q) {
+      where.OR = [
+        { slug: { contains: filters.q, mode: "insensitive" } },
+        { description: { contains: filters.q, mode: "insensitive" } },
+        {
+          keyFeatures: {
+            some: { value: { contains: filters.q, mode: "insensitive" } },
+          },
+        },
+      ];
+    }
+
     // Map frontend params to DB fields
     if (filters.bodyType) {
       where.body = { contains: filters.bodyType, mode: "insensitive" };
@@ -426,7 +437,7 @@ export async function getFilteredCars(filters: any) {
     // Fetch results from Prisma
     const cars = await prisma.car.findMany({
       where,
-      include: { images: true },
+      include: { images: true,keyFeatures: true },
     });
 
     return {
