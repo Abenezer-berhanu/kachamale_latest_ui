@@ -11,17 +11,15 @@ export default async function HomeCarsListWrapper({ cars }: any) {
       </p>
     </div>
   ) : (
-    <div className="grid mdMob:grid-cols-2 tablet:grid-cols-3 mdTab:grid-cols-4 gap-4 my-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mdTab:grid-cols-3 gap-4 my-3">
       {cars.map((item: CarType, idx: number) => (
         <HomePageCard
-          name={String(
-            item?.make + " " + item?.model + " " + item?.yearOfManufacture
-          )}
+          name={`${item.make} ${item.model} ${item.yearOfManufacture}`}
           slug={item.slug}
           horsePower={item.horsePower}
           condition={item.condition}
           img={item.images[0]?.url}
-          location={String(item.sellerCity + " " + item.sellerStreet)}
+          location={`${item.sellerCity} ${item.sellerStreet}`}
           price={item.price}
           transmission={item.transmission}
           key={idx}

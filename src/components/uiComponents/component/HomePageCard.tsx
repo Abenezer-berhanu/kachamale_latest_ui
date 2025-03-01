@@ -17,22 +17,20 @@ export default function HomePageCard(props: PropsType) {
   return (
     <Link
       href={props.slug}
-      className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1 max-w-[540px] max-h-[300px]"
+      className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1"
     >
-      <div className="">
+      <div className="w-full">
         <Image
           src={props.img}
           alt={props.name}
           unoptimized
-          width={300}
+          width={500}
           height={300}
-          className="w-full h-[170px] object-cover"
+          className="w-full h-[200px] object-cover"
         />
       </div>
-      <div className="p-3">
-        <h1 className="text-xl font-bold line-clamp-1 max-w-[350px]">
-          {props.name}
-        </h1>
+      <div className="p-3 flex-grow">
+        <h1 className="text-xl font-bold line-clamp-1">{props.name}</h1>
         <small className="line-clamp-1">{props.location}</small>
         <div className="flex justify-between my-1 items-center">
           <h1 className="text-xl font-bold">
