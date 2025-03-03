@@ -7,10 +7,11 @@ import React, { Suspense } from "react";
 export default async function page({
   searchParams,
 }: {
-  searchParams: { page: number };
+  searchParams: Promise<{ page: number }>;
 }) {
+  const sp = (await searchParams).page;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cars: any = await getMyAds(Number(searchParams.page || 1));
+  const cars: any = await getMyAds(Number(sp || 1));
 
   return (
     <div className="w-full max-w-[1000px] mx-auto">
