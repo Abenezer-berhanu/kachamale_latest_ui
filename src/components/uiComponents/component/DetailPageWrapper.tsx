@@ -25,8 +25,6 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
       " " +
       data?.model +
       " " +
-      data?.color +
-      " " +
       data?.yearOfManufacture
   );
 
