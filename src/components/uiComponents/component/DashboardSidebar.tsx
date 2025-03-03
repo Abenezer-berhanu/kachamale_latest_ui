@@ -1,5 +1,10 @@
 "use client";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
 import { Camera, Clock5, Crown, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
@@ -33,6 +38,7 @@ function DashboardSidebar() {
           <SheetTrigger className="w-12 h-fit border-r flex items-start justify-center">
             <HumbergerMenu />
           </SheetTrigger>
+          <SheetTitle></SheetTitle>
           <SheetContent className="px-0">
             <div className="w-full h-full flex flex-col border">
               <DashboardSidebarCard
