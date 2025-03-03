@@ -31,7 +31,7 @@ const HumbergerMenu = () => {
   );
 };
 
-function DashboardSidebar() {
+function DashboardSidebar({ user }: { user: any }) {
   const { signOut } = useClerk();
 
   return (
@@ -64,18 +64,22 @@ function DashboardSidebar() {
                 link="/ad/profile"
                 Icon={User}
               />
-              <DashboardSidebarCard
-                label="CHPC"
-                smallText="create home page carousel"
-                link="/ad/profile/chpc"
-                Icon={User}
-              />
-              <DashboardSidebarCard
-                label="CPA"
-                smallText="create promotion Ad"
-                link="/ad/profile/cpa"
-                Icon={User}
-              />
+              {user?.success && user.message.role.toLowerCase() == "admin" && (
+                <>
+                  <DashboardSidebarCard
+                    label="CHPC"
+                    smallText="create home page carousel"
+                    link="/ad/chpc"
+                    Icon={User}
+                  />
+                  <DashboardSidebarCard
+                    label="CPA"
+                    smallText="create promotion Ad"
+                    link="/ad/cpa"
+                    Icon={User}
+                  />
+                </>
+              )}
               <CustomeButton
                 onClick={signOut}
                 title="Log out"
@@ -102,18 +106,22 @@ function DashboardSidebar() {
           Icon={Plus}
         />
         <DashboardSidebarCard label="Profile" link="/ad/profile" Icon={User} />
-        <DashboardSidebarCard
-          label="CHPC"
-          smallText="create home page carousel"
-          link="/ad/profile/chpc"
-          Icon={Crown}
-        />
-        <DashboardSidebarCard
-          label="CPA"
-          smallText="create promotion Ad"
-          link="/ad/profile/cpa"
-          Icon={Crown}
-        />
+        {user?.success && user.message.role.toLowerCase() == "admin" && (
+          <>
+            <DashboardSidebarCard
+              label="CHPC"
+              smallText="create home page carousel"
+              link="/ad/chpc"
+              Icon={User}
+            />
+            <DashboardSidebarCard
+              label="CPA"
+              smallText="create promotion Ad"
+              link="/ad/cpa"
+              Icon={User}
+            />
+          </>
+        )}
         <CustomeButton
           onClick={signOut}
           title="Log out"
