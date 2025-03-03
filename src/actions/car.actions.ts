@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import cloudinary from "@/lib/cloudinaryConfig";
 import { prisma } from "@/lib/prisma";
 import { createImages, createKeyFeatures, validateCarData } from "@/lib/utils";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -294,44 +294,23 @@ export const updateCarField = async (
   }
 };
 
-export const getCarsForHomePage = async () => {
+export const getCarsForHomePage = async (pageNumber: number) => {
   try {
-    const user = await currentUser();
-    const { userId } = await auth();
-
-    const userIdString = String(userId || "");
-
-    if (!user || !userId) {
-      const cars = await prisma.car.findMany({
-        include: {
-          images: true,
-        },
-        take: 12,
-      });
-
-      return cars;
-    }
+    const takeAmount = Number(process.env.QUERY_LIMIT) || 10; // Default limit
+    const totalCars = await prisma.car.count();
+    const totalPages = Math.ceil(totalCars / takeAmount);
+    const skipAmount = (pageNumber - 1) * takeAmount;
 
     const cars = await prisma.car.findMany({
-      where: {
-        NOT: {
-          authorClerkId: userIdString,
-        },
-      },
-      include: {
-        images: true,
-      },
-      take: 12,
+      include: { images: true },
+      skip: skipAmount,
+      take: takeAmount,
     });
 
-    return cars;
+    return { cars, totalPages };
   } catch (error) {
-    console.log(error);
-    return {
-      error: true,
-      success: true,
-      message: "Something went wrong please try again",
-    };
+    console.error("Error fetching cars:", error);
+    return { error: true, message: "Something went wrong, try again" };
   }
 };
 

@@ -1,28 +1,26 @@
 "use client"; // Error boundaries must be Client Components
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error() {
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+    if (refresh) {
+      location.reload();
+      setRefresh(false);
+    }
+  }, [refresh]);
 
   return (
-    <div className="flex flex-col gap-2 items-center justify-center">
-      <h2 className="text-2xl font-bold text-center font-black/50">
+    <div className="flex flex-col gap-4 items-center justify-center h-screen">
+      <h2 className="text-3xl font-bold text-center text-black/50">
         Something went wrong!
       </h2>
       <button
+        className="bg-main_blue text-white px-4 py-2 rounded-lg"
         onClick={
           // Attempt to recover by trying to re-render the segment
-          () => reset()
+          () => setRefresh(true)
         }
       >
         Try again

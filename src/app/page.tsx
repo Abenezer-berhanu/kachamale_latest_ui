@@ -4,9 +4,13 @@ import HomeCarsListWrapper from "@/components/uiComponents/component/HomeCarsLis
 import Loading from "@/components/uiComponents/component/Loading";
 import { Suspense } from "react";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cars: any = await getCarsForHomePage();
+  const cars: any = await getCarsForHomePage(Number(searchParams.page || 1));
   return (
     <main className="max-w-[1300px] mx-auto w-full px-4 min-h-screen space-y-5">
       <CarouselHome />
@@ -15,7 +19,7 @@ export default async function Home() {
           Popular cars
         </h2>
         <Suspense fallback={<Loading />}>
-          <HomeCarsListWrapper cars={cars} />
+          <HomeCarsListWrapper cars={cars.cars} totalPages={cars.totalPages} />
         </Suspense>
       </div>
     </main>

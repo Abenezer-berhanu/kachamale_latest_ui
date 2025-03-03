@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
   Sheet,
@@ -6,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
-import { Camera, Clock5, Crown, Plus, User } from "lucide-react";
+import { Camera, Clock5, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
 import { useClerk } from "@clerk/nextjs";
 
