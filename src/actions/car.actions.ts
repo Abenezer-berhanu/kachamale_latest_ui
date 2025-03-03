@@ -209,7 +209,7 @@ export const getMyLastAds = async () => {
         sellerStreet: true,
         yearOfManufacture: true,
       },
-      take: Number(process.env.PERSONAL_QUERY_LIMIT),
+      take: Number(process.env.PERSONAL_QUERY_LIMIT || 5),
       orderBy: {
         createdAt: "desc",
       },

@@ -10,7 +10,7 @@ export default async function page() {
     <div className="w-full mx-auto">
       <p className="mb-3 font-bold text-2xl text-gray_text">Your Posts</p>
       <Suspense fallback={<Loading />}>
-        {/* @ts-expect-error because */}
+        {/* @ts-expect-error because expected to have such error*/}
         <DashboardCarTable cars={cars} action={true} />
       </Suspense>
     </div>
