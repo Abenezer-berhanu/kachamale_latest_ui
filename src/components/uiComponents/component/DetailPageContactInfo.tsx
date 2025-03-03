@@ -43,7 +43,7 @@ export default function DetailPageContactInfo({
             />
             <AvatarFallback>{user?.name?.slice(0, 2)}</AvatarFallback>
           </Avatar>
-          <span className="w-3 h-3 bg-green-400 absolute right-0 bottom-0 rounded-full"></span>
+          {/* <span className="w-3 h-3 bg-green-400 absolute right-0 bottom-0 rounded-full"></span> */}
         </div>
         <div>
           <h2 className="text-lg font-semibold">{user?.name}</h2>

@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 interface PropsType {
   category?: string;
@@ -47,7 +48,21 @@ export default function DetailPageDetailTable(props: PropsType) {
               <TableCell className="font-medium">
                 {formatCamelCase(key)}
               </TableCell>
-              <TableCell>{value}</TableCell>
+              <TableCell>
+                {key === "color" || key === "interiorColor" ? (
+                  <Badge
+                    style={{
+                      backgroundColor: value as string,
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "4px",
+                    }}
+                  >
+                  </Badge>
+                ) : (
+                  value
+                )}
+              </TableCell>
             </TableRow>
           ))}
       </TableBody>

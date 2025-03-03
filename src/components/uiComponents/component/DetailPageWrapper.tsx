@@ -95,7 +95,7 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
               />
               <DetailPageDetailInfoCard
                 title="Engine Size"
-                value={data.engineSize || ""}
+                value={data.engineSize + " cc" || ""}
               />
             </div>
 
