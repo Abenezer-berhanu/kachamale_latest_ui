@@ -8,6 +8,7 @@ import {
 import DashboardSidebarCard from "./DashboardSidebarCard";
 import { Camera, Clock5, Crown, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
+import { useClerk } from "@clerk/nextjs";
 
 const HumbergerMenu = () => {
   return (
@@ -31,6 +32,8 @@ const HumbergerMenu = () => {
 };
 
 function DashboardSidebar() {
+  const { signOut } = useClerk();
+
   return (
     <div>
       <div className="md:hidden">
@@ -74,6 +77,7 @@ function DashboardSidebar() {
                 Icon={User}
               />
               <CustomeButton
+                onClick={signOut}
                 title="Log out"
                 className="py-[8px] mt-auto w-fit px-3"
               />
@@ -111,6 +115,7 @@ function DashboardSidebar() {
           Icon={Crown}
         />
         <CustomeButton
+          onClick={signOut}
           title="Log out"
           className="py-[8px] mt-auto w-fit px-3"
         />
