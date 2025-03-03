@@ -1,7 +1,7 @@
 "use client";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
-import { Camera, Clock5, Plus, User } from "lucide-react";
+import { Camera, Clock5, Crown, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
 
 const HumbergerMenu = () => {
@@ -37,7 +37,7 @@ function DashboardSidebar() {
             <div className="w-full h-full flex flex-col border">
               <DashboardSidebarCard
                 label="My Ads/Posts"
-                link="/ad/posts/john-doe-12384849388"
+                link="/ad/posts"
                 Icon={Camera}
               />
               <DashboardSidebarCard
@@ -52,7 +52,19 @@ function DashboardSidebar() {
               />
               <DashboardSidebarCard
                 label="Profile"
-                link="/ad/profile/john-doe-12384849388"
+                link="/ad/profile"
+                Icon={User}
+              />
+              <DashboardSidebarCard
+                label="CHPC"
+                smallText="create home page carousel"
+                link="/ad/profile/chpc"
+                Icon={User}
+              />
+              <DashboardSidebarCard
+                label="CPA"
+                smallText="create promotion Ad"
+                link="/ad/profile/cpa"
                 Icon={User}
               />
               <CustomeButton
@@ -80,6 +92,18 @@ function DashboardSidebar() {
           Icon={Plus}
         />
         <DashboardSidebarCard label="Profile" link="/ad/profile" Icon={User} />
+        <DashboardSidebarCard
+          label="CHPC"
+          smallText="create home page carousel"
+          link="/ad/profile/chpc"
+          Icon={Crown}
+        />
+        <DashboardSidebarCard
+          label="CPA"
+          smallText="create promotion Ad"
+          link="/ad/profile/cpa"
+          Icon={Crown}
+        />
         <CustomeButton
           title="Log out"
           className="py-[8px] mt-auto w-fit px-3"
