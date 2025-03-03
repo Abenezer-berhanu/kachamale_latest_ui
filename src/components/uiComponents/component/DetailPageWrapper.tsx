@@ -1,4 +1,7 @@
-import { getSingleCarBySlug } from "@/actions/car.actions";
+import {
+  getSingleCarBySlug,
+  incrementCarViewCount,
+} from "@/actions/car.actions";
 import DetailPageContactInfo from "@/components/uiComponents/component/DetailPageContactInfo";
 import DetailPageDetailInfoCard from "@/components/uiComponents/component/DetailPageDetailInfoCard";
 import DetailPageDetailTable from "@/components/uiComponents/component/DetailPageDetailTable";
@@ -11,6 +14,11 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
   type CarReturnType = Awaited<ReturnType<typeof getSingleCarBySlug>>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: CarReturnType = await getSingleCarBySlug(slug);
+
+  //@ts-expect-error because we expects the error
+  if (!data?.error && data?.id) {
+    await incrementCarViewCount(data?.id);
+  }
 
   const name = String(
     data?.make +
@@ -71,7 +79,10 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
 
             <div className="w-full my-3 grid grid-cols-2 gap-2">
               <DetailPageDetailInfoCard title="Make" value={data?.make || ""} />
-              <DetailPageDetailInfoCard title="Model" value={data?.model || ""} />
+              <DetailPageDetailInfoCard
+                title="Model"
+                value={data?.model || ""}
+              />
               <DetailPageDetailInfoCard
                 title="Condition"
                 value={data.condition || ""}

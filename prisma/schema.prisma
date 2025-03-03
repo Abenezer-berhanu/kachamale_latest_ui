@@ -26,8 +26,12 @@ model User {
   updatedAt DateTime @updatedAt
 
   // relation
-  profile Profile?
-  Car     Car[]
+  profile       Profile?
+  Car           Car[]
+  carSeenCounts CarSeenCount[] // Relation to track viewed cars
+  like          Like[] // Relation to track viewed cars
+  review        Review[]
+  report        UserReport[]
 
   @@index([email, isEmailVerified, name, role, clerkId])
 }
@@ -83,9 +87,13 @@ model Car {
   postType             PostType @default(NORMAL)
 
   // relations
-  keyFeatures KeyFeature[]
-  images      Image[]
-  author      User         @relation(fields: [authorClerkId], references: [clerkId])
+  keyFeatures   KeyFeature[]
+  images        Image[]
+  author        User           @relation(fields: [authorClerkId], references: [clerkId])
+  carSeenCounts CarSeenCount[] // Relation to track views
+  like          Like[] // Relation to track likes
+  review        Review[]
+  UserReport    UserReport[]
 
   // add index
   @@index([authorClerkId, postType, createdAt, yearOfManufacture, transmission, sellerCity, role, price, model, make, body])
@@ -115,4 +123,58 @@ model KeyFeature {
   //relation
   Car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
   carId String
+}
+
+model CarSeenCount {
+  id       String   @id @default(uuid())
+  userId   String
+  carId    String
+  viewedAt DateTime @default(now())
+
+  //relation
+  user User @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+  car  Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id      String   @id @default(uuid())
+  userId  String
+  carId   String
+  likedAt DateTime @default(now())
+
+  // relation 
+  car  Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  carId     String
+
+  //relation
+  user User @relation(fields: [userId], references: [clerkId])
+  car  Car  @relation(fields: [carId], references: [id])
+
+  @@index([rating, createdAt, updatedAt, carId])
+}
+
+model UserReport {
+  id        String   @id @default(uuid())
+  reason    String
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  carId     String
+
+  //relation
+  user User @relation(fields: [userId], references: [clerkId])
+  car  Car  @relation(fields: [carId], references: [id])
+
+  @@index([reason, createdAt, updatedAt, carId])
 }

@@ -484,3 +484,39 @@ export async function getMinPrice() {
     console.log(error);
   }
 }
+
+export async function incrementCarViewCount(carId: string) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return { error: true, success: false, message: "Access denied" };
+    }
+
+    //check if the data has not saved or seen yet with this person
+    const carSeenCount = await prisma.carSeenCount.findFirst({
+      where: {
+        carId: carId,
+        userId: userId,
+      },
+    });
+
+    if (!carSeenCount) {
+      await prisma.carSeenCount.create({
+        data: {
+          carId: carId,
+          userId: userId,
+        },
+      });
+    }
+
+    return;
+  } catch (error) {
+    console.log(error);
+    return {
+      error: true,
+      success: false,
+      message: "Something went wrong please check your connection",
+    };
+  }
+}
