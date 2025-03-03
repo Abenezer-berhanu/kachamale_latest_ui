@@ -135,12 +135,23 @@ export const handleDeleteCarClick = async (formData: FormData) => {
   }
 };
 
-export const getMyAds = async () => {
+export const getMyAds = async (pageNumber: number) => {
   try {
     const { userId } = await auth();
 
     if (!userId)
       return { success: false, error: true, message: "Access denied" };
+
+    const takeAmount = Number(process.env.QUERY_LIMIT) || 10; // Default limit
+    const totalCars = await prisma.car.count({
+      where: {
+        author: {
+          clerkId: userId,
+        },
+      },
+    });
+    const totalPages = Math.ceil(totalCars / takeAmount);
+    const skipAmount = (pageNumber - 1) * takeAmount;
 
     const myAds = await prisma.car.findMany({
       where: {
@@ -159,10 +170,11 @@ export const getMyAds = async () => {
         sellerStreet: true,
         yearOfManufacture: true,
       },
-      take: Number(process.env.QUERY_LIMIT),
+      skip: skipAmount,
+      take: takeAmount,
     });
 
-    return myAds;
+    return { myAds, totalPages };
   } catch (error) {
     console.log(error);
     return {

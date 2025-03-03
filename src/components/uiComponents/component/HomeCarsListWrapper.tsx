@@ -13,7 +13,7 @@ export default async function HomeCarsListWrapper({ cars, totalPages }: any) {
       </p>
     </div>
   ) : (
-    <div>
+    <div className="flex flex-col gap-3">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mdTab:grid-cols-3 gap-4 my-3">
         {cars.map((item: CarType, idx: number) => (
           <HomePageCard
