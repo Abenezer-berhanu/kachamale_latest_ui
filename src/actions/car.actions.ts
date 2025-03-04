@@ -582,6 +582,7 @@ export async function getLikedCars(pageNumber: number) {
       },
       take: takeAmount,
       skip: skipAmount,
+      orderBy: { likedAt: "desc" },
     });
 
     return { success: true, error: false, cars: likedCars, totalPages };

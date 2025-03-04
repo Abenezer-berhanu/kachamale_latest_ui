@@ -1,7 +1,8 @@
 import { getLikedCars } from "@/actions/car.actions";
 import HomePageCard from "@/components/uiComponents/component/HomePageCard";
-import React from "react";
-
+import React, { Suspense } from "react";
+import Loading from "../loading";
+import Pagination from "@/components/uiComponents/component/Pagination";
 
 async function page({
   searchParams,
@@ -38,6 +39,12 @@ async function page({
             You have liked no car yet
           </b>
         </div>
+      )}
+
+      {data?.totalPages && data?.totalPages > 1 && (
+        <Suspense fallback={<Loading />}>
+          <Pagination totalPages={data?.totalPages} siblingCount={1} />
+        </Suspense>
       )}
     </div>
   );
