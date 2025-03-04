@@ -13,7 +13,7 @@ export default async function Navbar() {
   if (user) {
     const existUser = await getUserFromDb();
     if (existUser?.userNotFound) {
-      console.log("got here on navbar page but not expected to be got here")
+      console.log("got here on navbar page but not expected to be got here");
       await syncUserToDb();
     }
   }
@@ -34,7 +34,7 @@ export default async function Navbar() {
         </Link>
 
         {/* Show Search Input on large screens, icon on tablet/smaller */}
-        <div className="flex-1 px-3">
+        <div className="flex items-center justify-center px-3">
           <NavbarSearch />
         </div>
       </div>
@@ -51,6 +51,9 @@ export default async function Navbar() {
           <UserButton />
           <Link href={"/ad/posts"}>
             <CustomeButton title="Dashboard" />
+          </Link>
+          <Link href={"/likes"} className="border-l-2 border-white pl-2">
+            <CustomeButton title="likes" />
           </Link>
         </div>
       )}

@@ -308,7 +308,7 @@ export const updateCarField = async (
 
 export const getCarsForHomePage = async (pageNumber: number) => {
   try {
-    const takeAmount = Number(process.env.QUERY_LIMIT) || 10; // Default limit
+    const takeAmount = Number(process.env.QUERY_LIMIT) || 12; // Default limit
     const totalCars = await prisma.car.count();
     const totalPages = Math.ceil(totalCars / takeAmount);
     const skipAmount = (pageNumber - 1) * takeAmount;
@@ -559,5 +559,39 @@ export async function toggleLike(carId: string) {
       error: true,
       message: "Something went wrong please try again",
     };
+  }
+}
+
+export async function getLikedCars(pageNumber: number) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) return { error: true, success: false };
+
+    const takeAmount = Number(process.env.QUERY_LIMIT) || 12; // Default limit
+    const totalCars = await prisma.car.count();
+    const totalPages = Math.ceil(totalCars / takeAmount);
+    const skipAmount = (pageNumber - 1) * takeAmount;
+
+    const likedCars = await prisma.like.findMany({
+      where: { userId },
+      include: {
+        car: {
+          include: { images: true }, // Include images if needed
+        },
+      },
+      take: takeAmount,
+      skip: skipAmount,
+    });
+
+    return { success: true, error: false, cars: likedCars, totalPages };
+  } catch (error) {
+    if (error) {
+      return {
+        error: true,
+        success: false,
+        message: "something went wrong please try again",
+      };
+    }
   }
 }

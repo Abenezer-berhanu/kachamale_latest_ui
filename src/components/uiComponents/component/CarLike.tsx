@@ -42,21 +42,21 @@ function CarLike({ isLiked, carId }: { isLiked: boolean; carId: string }) {
   };
 
   return !isCarLiked ? (
-    <button onClick={handleClick}>
+    <div>
       {loading ? (
         <Loading size="small" />
       ) : (
-        <FaRegHeart size={24} className="text-red-500" />
+        <FaRegHeart size={24} className="text-red-500" onClick={handleClick}/>
       )}
-    </button>
+    </div>
   ) : (
-    <button onClick={handleClick}>
+    <div>
       {loading ? (
         <Loading size="small" />
       ) : (
-        <FaHeart size={24} className="text-red-500" />
+        <FaHeart size={24} className="text-red-500" onClick={handleClick}/>
       )}
-    </button>
+    </div>
   );
 }
 
