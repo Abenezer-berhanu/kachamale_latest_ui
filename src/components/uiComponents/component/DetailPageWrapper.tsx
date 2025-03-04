@@ -9,6 +9,7 @@ import DetailPageImageCarousel from "@/components/uiComponents/component/DetailP
 import FeatureList from "@/components/uiComponents/component/KeyFeaturesList";
 import Image from "next/image";
 import React from "react";
+import CarLike from "./CarLike";
 
 export default async function DetailPageWrapper({ slug }: { slug: string }) {
   type CarReturnType = Awaited<ReturnType<typeof getSingleCarBySlug>>;
@@ -21,11 +22,7 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
   }
 
   const name = String(
-    data?.make +
-      " " +
-      data?.model +
-      " " +
-      data?.yearOfManufacture
+    data?.make + " " + data?.model + " " + data?.yearOfManufacture
   );
 
   const location = String(data?.sellerCity + " " + data?.sellerStreet);
@@ -36,7 +33,7 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
       <p className="text-2xl font-bold text-blue-500 opacity-50 mt-10 text-center"></p>
     </div>
   ) : data ? (
-    <>
+    <div className="px-2">
       <div className="mb-3 w-full flex border justify-center max-h-[200px] tablet:hidden">
         <Image
           src={"/assets/adImage.png"}
@@ -53,7 +50,10 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
         <section className="mdTab:col-span-3 h-full w-full grid tablet:grid-cols-2 p-2 gap-2">
           {/* left side descriptions */}
           <div className="w-full h-fit tablet:h-full flex flex-col gap-2">
-            <h1 className="text-2xl font-bold max-w-[350px]">{name}</h1>
+            <span className="flex items-center justify-between">
+              <h1 className="text-2xl font-bold max-w-[350px]">{name}</h1>
+              <CarLike isLiked={Boolean(data.like.length)} carId={data.id} />
+            </span>
             <h1 className="text-2xl font-bold text-main_blue">
               ETB {data?.price?.toLocaleString()}
             </h1>
@@ -146,7 +146,7 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
           </div>
         </section>
       </main>
-    </>
+    </div>
   ) : (
     ""
   );

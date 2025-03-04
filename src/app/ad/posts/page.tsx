@@ -25,9 +25,11 @@ export default async function page({
           <Suspense fallback={<Loading />}>
             <DashboardCarTable cars={cars.myAds} action={true} />
           </Suspense>
-          <Suspense fallback={<Loading />}>
-            <Pagination totalPages={cars.totalPages} />
-          </Suspense>
+          {cars.totalPages > 1 && (
+            <Suspense fallback={<Loading />}>
+              <Pagination totalPages={cars.totalPages} />
+            </Suspense>
+          )}
         </>
       )}
     </div>

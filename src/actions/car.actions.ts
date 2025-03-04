@@ -328,6 +328,7 @@ export const getCarsForHomePage = async (pageNumber: number) => {
 
 export const getSingleCarBySlug = async (slug: string) => {
   try {
+    const { userId } = await auth();
     const car = await prisma.car.findUnique({
       where: { slug: slug },
       include: {
@@ -343,6 +344,7 @@ export const getSingleCarBySlug = async (slug: string) => {
             keyFeatures: true,
           },
         },
+        like: userId ? { where: { userId } } : false,
       },
     });
 
@@ -508,6 +510,54 @@ export async function incrementCarViewCount(carId: string) {
       error: true,
       success: false,
       message: "Something went wrong please check your connection",
+    };
+  }
+}
+
+export async function toggleLike(carId: string) {
+  try {
+    const { userId } = await auth();
+
+    if (!carId || !userId)
+      return {
+        error: true,
+        success: false,
+        message: "Login before liking car",
+      };
+
+    const existingLike = await prisma.like.findFirst({
+      where: { userId, carId },
+    });
+
+    if (existingLike) {
+      // Unlike the car
+      await prisma.like.delete({
+        where: { id: existingLike.id },
+      });
+      return {
+        success: true,
+        error: false,
+        message: "like removed",
+        hasLiked: false,
+      };
+    } else {
+      // Like the car
+      await prisma.like.create({
+        data: { userId, carId },
+      });
+      return {
+        success: true,
+        error: false,
+        message: "like added",
+        hasLiked: true,
+      };
+    }
+  } catch (error) {
+    console.error("Error toggling like:", error);
+    return {
+      success: false,
+      error: true,
+      message: "Something went wrong please try again",
     };
   }
 }
