@@ -48,7 +48,9 @@ export default async function Navbar() {
         </>
       ) : (
         <div className="flex gap-4">
-          <UserButton />
+          <div className="max-md:hidden flex items-center justify-center">
+            <UserButton />
+          </div>
           <Link href={"/ad/posts"}>
             <CustomeButton title="Dashboard" />
           </Link>
