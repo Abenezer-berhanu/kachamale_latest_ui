@@ -12,7 +12,7 @@ import { createPA } from "@/actions/pa.actions";
 
 function PromotionAdForm() {
   const [state, formAction, loading] = useActionState(createPA, null);
-  const { image } = useChpcStore();
+  const { image,setImage } = useChpcStore();
   const { toast } = useToast();
   const { push } = useRouter();
 
@@ -28,6 +28,7 @@ function PromotionAdForm() {
       toast({
         description: state.message,
       });
+      setImage("")
       push("/ad/pa");
     }
   }, [state]);

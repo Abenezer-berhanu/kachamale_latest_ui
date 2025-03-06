@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface ChpcStoreType {
-  image: any;
+  image: null | string;
   loading: boolean;
 
   //actions
