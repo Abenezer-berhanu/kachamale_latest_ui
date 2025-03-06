@@ -13,7 +13,6 @@ function ChpcForm() {
   const [loading, setLoading] = useState(false);
   const { push } = useRouter();
   const { image, setImage } = useChpcStore();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   const {
     register,
@@ -30,7 +29,7 @@ function ChpcForm() {
         description: data.description,
         link: data?.link,
       });
-      if (response.error) {
+      if (response?.error) {
         toast({
           variant: "destructive",
           description: response.message,
@@ -39,7 +38,7 @@ function ChpcForm() {
 
       setImage("");
       toast({
-        description: response.message,
+        description: response?.message || "successfully created",
       });
       push("/hpc");
     } catch (error) {
