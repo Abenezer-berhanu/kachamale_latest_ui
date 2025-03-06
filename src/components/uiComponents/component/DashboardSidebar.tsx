@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import DashboardSidebarCard from "./DashboardSidebarCard";
-import { Camera, Clock5, Plus, User } from "lucide-react";
+import { Camera, Clock5, CrownIcon, Plus, User } from "lucide-react";
 import CustomeButton from "./CustomeButton";
 import { useClerk } from "@clerk/nextjs";
 
@@ -110,16 +110,30 @@ function DashboardSidebar({ user }: { user: any }) {
         {user?.success && user.message.role.toLowerCase() == "admin" && (
           <>
             <DashboardSidebarCard
-              label="CHPC"
-              smallText="create home page carousel"
-              link="/ad/chpc"
-              Icon={User}
+              label="HPC"
+              smallText="all home page carousel list"
+              link="/ad/hpc"
+              Icon={CrownIcon}
             />
+            <DashboardSidebarCard
+              label="CHPC"
+              smallText="create new home page carousel"
+              link="/ad/chpc"
+              Icon={CrownIcon}
+            />
+
+            <DashboardSidebarCard
+              label="PA"
+              smallText="promotion Ad list"
+              link="/ad/pa"
+              Icon={CrownIcon}
+            />
+
             <DashboardSidebarCard
               label="CPA"
               smallText="create promotion Ad"
               link="/ad/cpa"
-              Icon={User}
+              Icon={CrownIcon}
             />
           </>
         )}

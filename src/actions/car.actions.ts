@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { createImages, createKeyFeatures, validateCarData } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { uploadImage } from "./user.actions";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const createCar = async (carInfo: CarInfoType | any) => {
@@ -598,60 +597,3 @@ export async function getLikedCars(pageNumber: number) {
   }
 }
 
-export async function createChpc(data: ChpcType) {
-  try {
-    console.log(data.title)
-    if (!data.description || !data.title || !data.img)
-      return {
-        error: true,
-        success: false,
-        message: "Except Link all fields are required",
-      };
-
-    const chpcCount = await prisma.homePageCarousel.count();
-
-    if (chpcCount > 0) {
-      return {
-        error: true,
-        success: false,
-        message:
-          "Home page carousel has reached please delete before adding new one",
-      };
-    }
-
-    //upload img to coudinary
-    const uploadedImage = await uploadImage(data.img);
-
-    if (uploadedImage) {
-      await prisma.homePageCarousel.create({
-        data: {
-          description: data.description,
-          title: data.title,
-          image: uploadedImage.url,
-          link: data.link || "",
-        },
-      });
-
-      revalidatePath("/hpc");
-
-      return {
-        success: true,
-        error: false,
-        message: "New Home page carousel created",
-      };
-    } else {
-      return {
-        success: false,
-        error: true,
-        message: "something went wrong please try again",
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    return {
-      error: true,
-      success: false,
-      message: "something went wrong please try again",
-    };
-  }
-}
