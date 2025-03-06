@@ -12,8 +12,8 @@ interface PropsType {
   condition: string;
   transmission: string;
   slug: string;
-  like: number;
-  view: number;
+  like?: number;
+  view?: number;
 }
 
 export default function HomePageCard(props: PropsType) {
