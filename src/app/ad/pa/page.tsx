@@ -1,8 +1,13 @@
+// import { getAllPa } from '@/actions/pa.actions'
+// import PromotionAdTable from '@/components/uiComponents/component/PromotionAdTable'
 import React from 'react'
 
-function page() {
+async function page() {
+  // const allPa = await getAllPa()
   return (
-    <div>page</div>
+    <div>
+      {/* {<PromotionAdTable pa={allPa}/>} */}
+    </div>
   )
 }
 

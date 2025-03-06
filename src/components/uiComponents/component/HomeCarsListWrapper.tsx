@@ -17,6 +17,8 @@ export default async function HomeCarsListWrapper({ cars, totalPages }: any) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mdTab:grid-cols-3 gap-4 my-3">
         {cars.map((item: CarType, idx: number) => (
           <HomePageCard
+            like={item._count?.like || 0}
+            view={item._count?.carSeenCount || 0}
             name={`${item.make} ${item.model} ${item.yearOfManufacture}`}
             slug={item.slug}
             horsePower={item.horsePower}

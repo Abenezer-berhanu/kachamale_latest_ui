@@ -3,17 +3,22 @@ import Link from "next/link";
 import React from "react";
 import NavbarSearch from "./NavbarSearch";
 import CustomeButton from "./CustomeButton";
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { getUserFromDb, syncUserToDb } from "@/actions/user.actions";
+import {
+  getMyProfile,
+  getUserFromDb,
+  syncUserToDb,
+} from "@/actions/user.actions";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function Navbar() {
   const user = await currentUser();
+  const existUser = await getUserFromDb();
+  const profile = await getMyProfile();
 
   if (user) {
-    const existUser = await getUserFromDb();
     if (existUser?.userNotFound) {
-      console.log("got here on navbar page but not expected to be got here");
       await syncUserToDb();
     }
   }
@@ -48,9 +53,22 @@ export default async function Navbar() {
         </>
       ) : (
         <div className="flex gap-4">
-          <div className="max-md:hidden flex items-center justify-center">
-            <UserButton />
-          </div>
+          <Link
+            href={"/ad/profile"}
+            className="max-md:hidden flex items-center justify-center"
+          >
+            <Avatar>
+              <AvatarImage
+                src={
+                  profile?.data?.profile?.avatarUrl
+                    ? String(profile?.data?.profile?.avatarUrl)
+                    : profile?.data?.name.split("")[0]
+                }
+                alt={profile.data?.name}
+              />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </Link>
           <Link href={"/ad/posts"}>
             <CustomeButton title="Dashboard" />
           </Link>

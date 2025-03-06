@@ -1,10 +1,10 @@
-import PromotionAd from "@/components/uiComponents/component/PromotionAd";
+// import PromotionAd from "@/components/uiComponents/component/PromotionAd";
 import React from "react";
 
 function page() {
   return (
     <div>
-      <PromotionAd />
+      {/* <PromotionAd /> */}
     </div>
   );
 }

@@ -26,6 +26,10 @@ interface CarType {
   negotiationAvailable: boolean;
   phoneNumber: string;
   payment: string;
+  _count?: {
+    like: number;
+    carSeenCount: number;
+  };
 }
 
 interface ImageType {

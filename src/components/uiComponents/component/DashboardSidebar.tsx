@@ -122,7 +122,7 @@ function DashboardSidebar({ user }: { user: any }) {
               Icon={CrownIcon}
             />
 
-            <DashboardSidebarCard
+            {/* <DashboardSidebarCard
               label="PA"
               smallText="promotion Ad list"
               link="/ad/pa"
@@ -134,7 +134,7 @@ function DashboardSidebar({ user }: { user: any }) {
               smallText="create promotion Ad"
               link="/ad/cpa"
               Icon={CrownIcon}
-            />
+            /> */}
           </>
         )}
         <CustomeButton

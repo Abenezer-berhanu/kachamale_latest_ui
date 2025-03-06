@@ -54,3 +54,22 @@ export async function createPA(prevState, formData: FormData) {
     }
   }
 }
+
+export async function getAllPa() {
+  try {
+    const { userId } = await auth();
+    if (!userId) return;
+
+    const allPa = await prisma.promotionAd.findMany();
+
+    return allPa;
+  } catch (error) {
+    if (error) {
+      return {
+        success: false,
+        error: true,
+        message: "something went wrong please try again",
+      };
+    }
+  }
+}

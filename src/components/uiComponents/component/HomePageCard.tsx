@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { ThumbsUp } from "lucide-react";
 
 interface PropsType {
   name: string;
@@ -11,13 +12,15 @@ interface PropsType {
   condition: string;
   transmission: string;
   slug: string;
+  like: number;
+  view: number;
 }
 
 export default function HomePageCard(props: PropsType) {
   return (
     <Link
       href={props.slug}
-      className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1"
+      className="w-full shadow-md rounded-lg overflow-hidden flex flex-col gap-1 relative"
     >
       <div className="w-full">
         <Image
@@ -30,6 +33,12 @@ export default function HomePageCard(props: PropsType) {
         />
       </div>
       <div className="p-3 flex-grow">
+        <div className="flex items-center justify-end absolute top-2 right-2 p-2 rounded-full bg-white">
+          <span className="flex items-center justify-center gap-1">
+            <p>{props.like} </p>
+            <ThumbsUp size={18} />
+          </span>
+        </div>
         <h1 className="text-xl font-bold line-clamp-1">{props.name}</h1>
         <small className="line-clamp-1">{props.location}</small>
         <div className="flex justify-between my-1 items-center">

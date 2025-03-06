@@ -314,7 +314,15 @@ export const getCarsForHomePage = async (pageNumber: number) => {
     const skipAmount = (pageNumber - 1) * takeAmount;
 
     const cars = await prisma.car.findMany({
-      include: { images: true },
+      include: {
+        images: true,
+        _count: {
+          select: {
+            like: true,
+            carSeenCounts: true,
+          },
+        },
+      },
       skip: skipAmount,
       take: takeAmount,
     });
@@ -596,4 +604,3 @@ export async function getLikedCars(pageNumber: number) {
     }
   }
 }
-

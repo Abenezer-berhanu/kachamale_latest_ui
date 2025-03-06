@@ -25,7 +25,7 @@ const DashboardSidebarCard = ({
         pathname == link && "text-white bg-main_blue"
       }`}
     >
-      <Icon size={16}/>
+      <Icon/>
       <div className="flex flex-col">
         <p className="font-bold text-lg">{label}</p>
         <small className="capitalize">{smallText}</small>
