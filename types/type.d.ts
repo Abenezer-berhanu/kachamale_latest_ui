@@ -42,6 +42,13 @@ interface KeyFeaturesType {
   carId: string;
 }
 
+type ChpcType = {
+  title: string;
+  img: any;
+  description: string;
+  link?: string;
+};
+
 interface CarInfoType {
   role: string;
   id: string;

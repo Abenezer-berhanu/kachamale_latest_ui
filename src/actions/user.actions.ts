@@ -172,7 +172,7 @@ export async function changeProfilePicture(file: string) {
       return {
         error: true,
         success: false,
-        message: "Something went wrong please check your connection",
+        message: "Something went wrong please try again",
       };
     }
 

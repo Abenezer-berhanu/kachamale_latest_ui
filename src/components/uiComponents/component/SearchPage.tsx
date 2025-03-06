@@ -27,6 +27,7 @@ function SearchPage() {
             <SearchPageBody />
           </Suspense>
         </SidebarInset>
+        
       </SidebarProvider>
     </div>
   );
