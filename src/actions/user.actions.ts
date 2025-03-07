@@ -76,9 +76,8 @@ export async function syncUserToDb() {
 export async function getUserFromDb() {
   try {
     const { userId } = await auth();
-    const user = await currentUser();
 
-    if (!userId || !user)
+    if (!userId)
       return { success: false, error: true, message: "Access denied" };
 
     const existUser = await prisma.user.findUnique({
