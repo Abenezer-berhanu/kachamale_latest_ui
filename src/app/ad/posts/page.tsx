@@ -1,6 +1,5 @@
 import { getMyAds } from "@/actions/car.actions";
 import DashboardCarTable from "@/components/uiComponents/component/DashboardCarTable";
-import Loading from "@/components/uiComponents/component/Loading";
 import Pagination from "@/components/uiComponents/component/Pagination";
 import React, { Suspense } from "react";
 
@@ -22,11 +21,9 @@ export default async function page({
         </div>
       ) : (
         <>
-          <Suspense fallback={<Loading />}>
-            <DashboardCarTable cars={cars.myAds} action={true} />
-          </Suspense>
+          <DashboardCarTable cars={cars.myAds} action={true} />
           {cars.totalPages > 1 && (
-            <Suspense fallback={<Loading />}>
+            <Suspense>
               <Pagination totalPages={cars.totalPages} />
             </Suspense>
           )}
