@@ -7,21 +7,21 @@ import { SignInButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import {
   getMyProfile,
-  getUserFromDb,
-  syncUserToDb,
+  // getUserFromDb,
+  // syncUserToDb,
 } from "@/actions/user.actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function Navbar() {
   const user = await currentUser();
-  const existUser = await getUserFromDb();
+  // const existUser = await getUserFromDb();
   const profile = await getMyProfile();
 
-  if (user) {
-    if (existUser?.userNotFound) {
-      await syncUserToDb();
-    }
-  }
+  // if (user) {
+  //   if (existUser?.userNotFound) {
+  //     await syncUserToDb();
+  //   }
+  // }
 
   return (
     <div className="h-[72px] bg-main_blue px-4 sm:px-8 md:px-16 flex items-center justify-between">
