@@ -1,13 +1,18 @@
 import React, { Suspense } from "react";
 import Loading from "./Loading";
-import { getUserFromDb } from "@/actions/user.actions";
 import DashboardSidebar from "./DashboardSidebar";
+import { auth } from "@clerk/nextjs/server";
+import { prisma } from "@/lib/prisma";
 
 async function DashboardSidebarWrapper() {
-  const user = await getUserFromDb();
+  const { userId } = await auth();
+
+  if (!userId) return;
+  const user = await prisma.user.findFirst({ where: { clerkId: userId } });
+
   return (
     <Suspense fallback={<Loading />}>
-      <DashboardSidebar user={user} />
+      <DashboardSidebar role={user?.role || ""} />
     </Suspense>
   );
 }

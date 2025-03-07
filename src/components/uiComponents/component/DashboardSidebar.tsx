@@ -32,7 +32,7 @@ const HumbergerMenu = () => {
   );
 };
 
-function DashboardSidebar({ user }: { user: any }) {
+function DashboardSidebar({ role }: { role: string }) {
   const { signOut } = useClerk();
 
   return (
@@ -65,7 +65,7 @@ function DashboardSidebar({ user }: { user: any }) {
                 link="/ad/profile"
                 Icon={User}
               />
-              {user?.success && user.message.role.toLowerCase() == "admin" && (
+              {role.toLowerCase() == "admin" && (
                 <>
                   <DashboardSidebarCard
                     label="CHPC"
@@ -107,7 +107,7 @@ function DashboardSidebar({ user }: { user: any }) {
           Icon={Plus}
         />
         <DashboardSidebarCard label="Profile" link="/ad/profile" Icon={User} />
-        {user?.success && user.message.role.toLowerCase() == "admin" && (
+        {role.toLowerCase() == "admin" && (
           <>
             <DashboardSidebarCard
               label="HPC"
