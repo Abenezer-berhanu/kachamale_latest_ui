@@ -52,7 +52,10 @@ export default async function DetailPageWrapper({ slug }: { slug: string }) {
           <div className="w-full h-fit tablet:h-full flex flex-col gap-2">
             <span className="flex items-center justify-between">
               <h1 className="text-2xl font-bold max-w-[350px]">{name}</h1>
-              <CarLike isLiked={data.like ? true : false} carId={data.id} />
+              <CarLike
+                isLiked={data.like && data?.like.length ? true : false}
+                carId={data.id}
+              />
             </span>
             <h1 className="text-2xl font-bold text-main_blue">
               ETB {data?.price?.toLocaleString()}
